@@ -1,17 +1,7 @@
 [
     {
-        "name": "Kleeping bag",
+        "name": "Kelowna thing",
         "quantity": 4,
         "expiration": 14
-    },
-    {
-        "name": "Electricity",
-        "quantity": 40,
-        "expiration": 14
-    },
-    {
-        "name": "Apples",
-        "quantity": 12,
-        "expiration": 5
     }
 ]

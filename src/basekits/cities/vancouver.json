@@ -1,17 +1,7 @@
 [
     {
-        "name": "Sleeping bag",
+        "name": "Vancouver thing",
         "quantity": 4,
         "expiration": 15
-    },
-    {
-        "name": "Electricity",
-        "quantity": 40,
-        "expiration": 12
-    },
-    {
-        "name": "Apples",
-        "quantity": 12,
-        "expiration": 18
     }
 ]

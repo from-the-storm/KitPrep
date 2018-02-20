@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Electricity",
+        "quantity": 40,
+        "expiration": 14
+    },
+    {
+        "name": "Apples",
+        "quantity": 12,
+        "expiration": 5
+    }
+]
