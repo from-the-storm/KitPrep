@@ -17,11 +17,17 @@ class Kit extends Component {
     }
 
     componentWillMount() {
+        let kit = require('../basekits/base.json')
+        
         let city = this.props.city
-        // Depending on the user's selected customization options, add in additional supplies to the array
-        city = city.replace('.', '').replace('/', '') // avoid loading other files
-        // if not city etc.
-        let kit = require('../basekits/cities/' + city + '.json')
+        // Avoid loading other files
+        city = city.replace('.', '').replace('/', '')
+        const cityKit = require('../basekits/cities/' + city + '.json')
+
+        // Add the city-specific kit to the basekit
+        kit = cityKit.concat(kit)
+
+        // Add addon kit(s) depending on user's selection
         if (this.props.kids === 'yes') { 
             const kidsKit = require('../basekits/addons/kids.json')
             // Prioritize the youths
