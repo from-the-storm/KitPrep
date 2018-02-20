@@ -29,5 +29,5 @@ The emergency preparedness kit preparator. Made with [Create React App](https://
 
 ## To Do - Future Release
 - [ ] Convert to TypeScript
+- [ ] Better cross-browser styled input elements
 - [ ] Expiry date email warnings
-

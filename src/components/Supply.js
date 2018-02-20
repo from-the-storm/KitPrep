@@ -13,6 +13,11 @@ class Supply extends Component {
         }
         this.handleSupplyChange = this.handleSupplyChange.bind(this)
         this.removeSupply = this.removeSupply.bind(this)
+        this.handleFocus = this.handleFocus.bind(this)
+    }
+
+    handleFocus(event) {
+        event.target.select()
     }
 
     componentWillMount() {
@@ -54,22 +59,26 @@ class Supply extends Component {
                         id="supply"
                         type="text"
                         name="nameOfSupply"
+                        placeholder="Your supply"
                         value={this.state.nameOfSupply}
                         onChange={this.handleSupplyChange}
                     />
                 </td>
-                <td>
+                <td class="fit">
                     <input 
                         id="quantity"
                         type="number"
                         name="quantityOfSupply"
                         min="1"
+                        max="999"
                         step="1"
+                        onFocus={this.handleFocus}
+                        placeholder="#"
                         value={this.state.quantityOfSupply}
                         onChange={this.handleSupplyChange}
                     />
                 </td>
-                <td>
+                <td class="fit">
                     <input 
                         id="date"
                         type="date"
@@ -78,8 +87,8 @@ class Supply extends Component {
                         onChange={this.handleSupplyChange}
                     />
                 </td>
-                <td>
-                    <button onClick={this.removeSupply}>X</button>
+                <td class="fit">
+                    <button className="del" onClick={this.removeSupply}>X</button>
                 </td>
             </tr>
         )

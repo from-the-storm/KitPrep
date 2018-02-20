@@ -1,3 +1,13 @@
+/*
+1: Structure 
+2: Type
+3: Elements
+4: Sections 
+5: Form
+6: Kit
+7: Animations 
+*/
+
 /* Structure */
 
 body {
@@ -13,20 +23,6 @@ header > div, footer > div {
   max-width: 1080px;
   margin: 0 auto;
   padding: 1rem;
-}
-
-#prepped {
-  display: block;
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 1rem;
-}
-
-#buttons {
-  padding: 2rem;
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 2rem 0 1rem;
 }
 
 header > div {
@@ -75,7 +71,6 @@ p.error {
   font-size: 0.9em;
   background: #f38888;
   color: #ffffff;
-  border-radius: 2px;
   border: 4px solid #e66f6f;
   display: inline-block;
 }
@@ -102,6 +97,13 @@ img {
   width: 100%;
 }
 
+#buttons {
+  padding: 2rem;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 2rem 0 1rem;
+}
+
 button {
   padding: 1rem;
   border: 0;
@@ -122,8 +124,9 @@ table button {
   padding: 0.5rem 0.7rem;
 }
 
-tbody tr td:nth-child(4) {
-  text-align: center;
+table button.del {
+  padding: 0.3rem 0.5rem;
+  font-weight: bold;
 }
 
 /* Sections */
@@ -141,7 +144,46 @@ tbody tr td:nth-child(4) {
   transition: filter 0.7s, opacity 0.7s;
 }
 
-/* Form Elements */
+.step.blurred {
+  filter: blur(5px);
+  opacity: 0.7;
+}
+
+#kit {
+  position: relative;
+}
+
+.prepper {
+  display: none;
+}
+
+.prepper.show {
+  display: inline-block;
+}
+
+#prepped {
+  display: block;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+#prepped:empty {
+  width: 0.5em;
+  height: 0.5em;
+  padding: 0.5em;
+  border: 1em solid rgba(0, 0, 0, 0.2);
+  border-left: 1em solid #000000;
+  border-radius: 50%;
+  animation: loading 1.1s infinite linear;
+}
+
+/* Form */
+
+.number, .selector, .yes-no {
+  margin: 1rem 0;
+  display: inline-block;
+}
 
 select, .number input {
   margin: 0 1rem;
@@ -212,14 +254,14 @@ select, .number input {
   display: none;
 }
 
-#one input[type="number"] {
+input[type="number"] {
   -webkit-appearance: textfield;
   -moz-appearance: textfield;
   appearance: textfield;
 }
 
-#one input[type=number]::-webkit-inner-spin-button, 
-#one input[type=number]::-webkit-outer-spin-button { 
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none;
 }
 
@@ -233,7 +275,6 @@ select, .number input {
   height: 30px;
   line-height: 1.3rem;
   z-index: 1;
-  border-radius: 2px;
 }
 
 input[type="radio"] {
@@ -258,7 +299,7 @@ input[type=radio] + label[for] {
   cursor: pointer;
 }
 
-.radio input[type="radio"]:checked ~ label {
+input[type="radio"]:checked ~ label {
   background: #ffffff;
 }
 
@@ -287,7 +328,6 @@ fieldset .yes-no:last-child {
   margin-right: 0;
 }
 
-
 /* Kit */
 
 table {
@@ -296,7 +336,6 @@ table {
 }
 
 thead tr {
-  text-align: left;
   background: #303030;
   color: #ffffff;
 }
@@ -305,9 +344,20 @@ thead th {
   padding: 1rem;
 }
 
+thead tr th:first-child {
+  text-align: left;
+}
+
 td {
-  width: 33.333%;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
+
+td.fit {
+  width: 1%;
+  white-space: no-wrap;
+  text-align: center;
+  padding: 0.5rem;
 }
 
 tr {
@@ -318,66 +368,51 @@ tbody tr:nth-child(odd) {
   background: #f1f1f1;
 }
 
-tbody tr:hover {
-  background: #f8d7d0;
-}
-
 tbody tr:last-child {
-  background: #cdcdcd;
+  background: #ffffff;
 }
 
 tbody tr:last-child button {
   margin: 0.5rem 0;
 }
 
-tbody tr:last-child:hover {
-  background: #cdcdcd;
+tbody tr:last-child td:hover {
+  background: #ffffff;
 }
 
-div.pad {
-  padding: 0.5rem 1rem 1rem;
-  background: whitesmoke;
-  color: black;
-}
-
-code {
-  background: #dcdcdc;
+table input {
+  background: none;
+  border: 0;
   padding: 0.5rem;
-  display: inline-block;
-  margin-left: 0.5rem;
+  box-sizing: border-box;
+  font-size: 1em;
+  width: 100%;
 }
 
-.step.blurred {
-  filter: blur(5px);
-  opacity: 0.7;
+table input[type="date"] {
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  margin-right: 0.5rem;
 }
 
-.number, .selector, .yes-no {
-  margin: 1rem 0;
-  display: inline-block;
-}
-
-#kit {
-  position: relative;
-}
-
-.prepper {
+table input[type="date"]::-webkit-inner-spin-button {
   display: none;
 }
 
-.prepper.show {
-  display: inline-block;
+table input[type=number] {
+  width: 50px;
+  text-align: center;
 }
 
-#prepped:empty {
-  width: 0.5em;
-  height: 0.5em;
-  padding: 0.5em;
-  border: 1em solid rgba(0, 0, 0, 0.2);
-  border-left: 1em solid #000000;
-  border-radius: 50%;
-  animation: loading 1.1s infinite linear;
+table tr td:hover {
+  background: #f8d7d0
 }
+
+table tr input:focus {
+  background: #ffffff;
+}
+
+/* Animations */
   
 @keyframes loading {
   0% {

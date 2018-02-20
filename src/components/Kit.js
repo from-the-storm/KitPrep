@@ -64,7 +64,7 @@ class Kit extends Component {
                 ...prevState.kitContents,
                 {
                     id: this.nextId(),
-                    name: "Your new supply",
+                    name: "Your supply",
                     quantity: 1,
                     expiration: 0
                 }
@@ -102,7 +102,7 @@ class Kit extends Component {
                     <thead>
                         <tr>
                             <th>Supply</th>
-                            <th>Quantity</th>
+                            <th>#</th>
                             <th>Expiration</th>
                             <th>Delete</th>
                         </tr>
