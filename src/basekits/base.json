@@ -2,15 +2,18 @@
     {
         "name": "Electricity",
         "quantity": 40,
+        "perishable": true,
         "expiration": 14
     },
     {
         "name": "Apples",
         "quantity": 12,
+        "perishable": true,
         "expiration": 5
     },
     {
         "name": "Thing that doesn't expire",
-        "quantity": 12
+        "quantity": 12,
+        "perishable": false
     }
 ]

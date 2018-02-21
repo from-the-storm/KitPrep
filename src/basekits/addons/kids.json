@@ -2,16 +2,19 @@
     {
         "name": "Kids thing",
         "quantity": 4,
-        "expiration": 13
+        "expiration": 13,
+        "perishable": true
     },
     {
         "name": "Electricity",
         "quantity": 40,
-        "expiration": 15
+        "expiration": 15,
+        "perishable": true
     },
     {
         "name": "Apples",
         "quantity": 12,
-        "expiration": 18
+        "expiration": 18,
+        "perishable": false
     }
 ]

@@ -11,7 +11,8 @@ class Kit extends Component {
             loading: true,
             kitContents: []
         })
-        this.addSupply = this.addSupply.bind(this)
+        this.addPerishable = this.addPerishable.bind(this)
+        this.addNonPerishable = this.addNonPerishable.bind(this)
         this.removeSupply = this.removeSupply.bind(this)
         this.nextId = this.nextId.bind(this)
     }
@@ -62,7 +63,7 @@ class Kit extends Component {
             }), 1500)
     }
 
-    addSupply(supply) {
+    addPerishable() {
         this.setState(prevState => ({
             kitContents: [
                 // use the spread syntax to take all supply items in state and push it into a new array. Then we append new supply.
@@ -71,19 +72,33 @@ class Kit extends Component {
                 {
                     id: this.nextId(),
                     name: "Your supply",
-                    quantity: 1
+                    quantity: 1,
+                    expiration: 0,
+                    perishable: true
                 }
             ]
         }))
     }
 
-     // does supply stand in for supplyId from the Supply component or the Kit component?
+    addNonPerishable() {
+        this.setState(prevState => ({
+            kitContents: [
+                ...prevState.kitContents,
+                {
+                    id: this.nextId(),
+                    name: "Your supply",
+                    quantity: 1,
+                    perishable: false
+                }
+            ]
+        }))
+    }
+
     removeSupply(supplyId) {
         console.log(supplyId)
         this.setState(prevState => ({
             // filter passes in a supplyId and performs a logical check when the supplyId's id is not equal to the id
             // it will return a new array that has removed the item where this condition is true
-            // kitcontents.sort item => item.expiration e.g.
             kitContents: prevState.kitContents.filter(item => item.id !== supplyId)
         }))
     }
@@ -102,18 +117,52 @@ class Kit extends Component {
         return (
             <div>
                 <h3>Your kit is prepped!</h3>
-                {this.state.kitContents.map(item =>
-                    <Supply 
-                        // From react docs: We don’t recommend using indexes for keys if the order of items may change. This can negatively impact performance and may cause issues with component state.
-                        key={item.id}
-                        supplyId={item.id}
-                        supplyName={item.name}
-                        supplyQuantity={item.quantity * this.props.people}
-                        daysUntilExpiry={item.expiration}
-                        onRemove={this.removeSupply}
-                     />
-                )}
-                <button className="add-supply" onClick={this.addSupply}>Add supply</button>
+                <h4>Perishables</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Supply</td>
+                            <td>#</td>
+                            <td>Expires on</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {this.state.kitContents.filter(item => item.perishable === true).map(item =>
+                        <Supply 
+                            // From react docs: We don’t recommend using indexes for keys if the order of items may change. This can negatively impact performance and may cause issues with component state.
+                            key={item.id}
+                            supplyId={item.id}
+                            supplyName={item.name}
+                            supplyQuantity={item.quantity * this.props.people}
+                            daysUntilExpiry={item.expiration}
+                            onRemove={this.removeSupply}
+                        />
+                    )}
+                    </tbody>
+                </table>
+                <button className="add-supply" onClick={this.addPerishable}>Add supply</button>
+                <hr />
+                <h4>Non-Perishables</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Supply</td>
+                            <td>#</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {this.state.kitContents.filter(item => item.perishable === false).map(item =>
+                        <Supply 
+                            key={item.id}
+                            supplyId={item.id}
+                            supplyName={item.name}
+                            supplyQuantity={item.quantity * this.props.people}
+                            onRemove={this.removeSupply}
+                        />
+                    )}
+                    </tbody>
+                </table>
+                <button className="add-supply" onClick={this.addNonPerishable}>Add supply</button>
             </div>
         )
     }

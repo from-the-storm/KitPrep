@@ -2,16 +2,19 @@
     {
         "name": "Homeowner thing",
         "quantity": 4,
-        "expiration": 13
+        "expiration": 13,
+        "perishable": true
     },
     {
         "name": "Electricity",
         "quantity": 40,
-        "expiration": 33
+        "expiration": 33,
+        "perishable": false
     },
     {
         "name": "Apples",
         "quantity": 12,
-        "expiration": 22
+        "expiration": 22,
+        "perishable": true
     }
 ]

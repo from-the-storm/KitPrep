@@ -52,8 +52,8 @@ class Supply extends Component {
     render() {
 
         return (
-            <div className="supply-row">
-                <div className="supply-name">
+            <tr>
+                <td>
                     <input 
                         type="text"
                         name="nameOfSupply"
@@ -61,8 +61,8 @@ class Supply extends Component {
                         value={this.state.nameOfSupply}
                         onChange={this.handleSupplyChange}
                     />
-                </div>
-                <div>
+                </td>
+                <td>
                     <input 
                         type="number"
                         name="quantityOfSupply"
@@ -74,21 +74,21 @@ class Supply extends Component {
                         value={this.state.quantityOfSupply}
                         onChange={this.handleSupplyChange}
                     />
-                </div>
-                {this.props.daysUntilExpiry &&
-                <div>
+                </td>
+                {this.props.daysUntilExpiry >= 0 &&
+                <td>
                     <input 
                         type="date"
                         name="dateOfExpiry"
                         value={this.state.dateOfExpiry}
                         onChange={this.handleSupplyChange}
                     />
-                </div>
+                </td>
                 }
-                <div>
+                <td>
                     <button className="del" onClick={this.removeSupply}>X</button>
-                </div>
-            </div>
+                </td>
+            </tr>
         )
     }
 }

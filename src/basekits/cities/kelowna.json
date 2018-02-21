@@ -2,6 +2,7 @@
     {
         "name": "Kelowna thing",
         "quantity": 4,
-        "expiration": 14
+        "expiration": 14,
+        "perishable": true
     }
 ]

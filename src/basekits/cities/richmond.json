@@ -2,6 +2,7 @@
     {
         "name": "Richmond thing",
         "quantity": 4,
-        "expiration": 44
+        "expiration": 44,
+        "perishable": true
     }
 ]
