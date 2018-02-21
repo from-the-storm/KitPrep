@@ -25,7 +25,7 @@ class Kit extends Component {
         const cityKit = require('../basekits/cities/' + city + '.json')
 
         // Add the city-specific kit to the basekit
-        kit = cityKit.concat(kit)
+        kit = kit.concat(cityKit)
 
         // Add addon kit(s) depending on user's selection
         if (this.props.kids === 'yes') { 
@@ -71,8 +71,7 @@ class Kit extends Component {
                 {
                     id: this.nextId(),
                     name: "Your supply",
-                    quantity: 1,
-                    expiration: 0
+                    quantity: 1
                 }
             ]
         }))
@@ -99,35 +98,22 @@ class Kit extends Component {
         if (loading) {
             return null
         }
-        // Once we're no longer loading, render the Kit
+
         return (
-            
             <div>
                 <h3>Your kit is prepped!</h3>
-                <table> 
-                    <thead>
-                        <tr>
-                            <th>Supply</th>
-                            <th>#</th>
-                            <th>Expiration</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {this.state.kitContents.map(item =>
-                        <Supply 
-                            // From react docs: We don’t recommend using indexes for keys if the order of items may change. This can negatively impact performance and may cause issues with component state.
-                            key={item.id}
-                            supplyId={item.id}
-                            supplyName={item.name}
-                            supplyQuantity={item.quantity * this.props.people}
-                            daysUntilExpiry={item.expiration}
-                            onRemove={this.removeSupply}
-                        />
-                    )}
-                        <tr><td colSpan="4"><button onClick={this.addSupply}>Add supply</button></td></tr>
-                    </tbody>
-                </table>
+                {this.state.kitContents.map(item =>
+                    <Supply 
+                        // From react docs: We don’t recommend using indexes for keys if the order of items may change. This can negatively impact performance and may cause issues with component state.
+                        key={item.id}
+                        supplyId={item.id}
+                        supplyName={item.name}
+                        supplyQuantity={item.quantity * this.props.people}
+                        daysUntilExpiry={item.expiration}
+                        onRemove={this.removeSupply}
+                     />
+                )}
+                <button className="add-supply" onClick={this.addSupply}>Add supply</button>
             </div>
         )
     }

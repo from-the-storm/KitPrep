@@ -8,7 +8,6 @@ class Supply extends Component {
         super(props)
         this.state = {
             nameOfSupply: '',
-            // name it so that the distinction is clearer 
             quantityOfSupply: 0,
         }
         this.handleSupplyChange = this.handleSupplyChange.bind(this)
@@ -53,20 +52,18 @@ class Supply extends Component {
     render() {
 
         return (
-            <tr>
-                <td>
+            <div className="supply-row">
+                <div className="supply-name">
                     <input 
-                        id="supply"
                         type="text"
                         name="nameOfSupply"
                         placeholder="Your supply"
                         value={this.state.nameOfSupply}
                         onChange={this.handleSupplyChange}
                     />
-                </td>
-                <td class="fit">
+                </div>
+                <div>
                     <input 
-                        id="quantity"
                         type="number"
                         name="quantityOfSupply"
                         min="1"
@@ -77,20 +74,21 @@ class Supply extends Component {
                         value={this.state.quantityOfSupply}
                         onChange={this.handleSupplyChange}
                     />
-                </td>
-                <td class="fit">
+                </div>
+                {this.props.daysUntilExpiry &&
+                <div>
                     <input 
-                        id="date"
                         type="date"
                         name="dateOfExpiry"
                         value={this.state.dateOfExpiry}
                         onChange={this.handleSupplyChange}
                     />
-                </td>
-                <td class="fit">
+                </div>
+                }
+                <div>
                     <button className="del" onClick={this.removeSupply}>X</button>
-                </td>
-            </tr>
+                </div>
+            </div>
         )
     }
 }

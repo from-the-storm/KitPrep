@@ -15,8 +15,10 @@ The emergency preparedness kit preparator. Made with [Create React App](https://
 - [ ] Print styling
 - [ ] Disabled styling
 - [X] Dynamically-generated id and key for supplies
+- [ ] Support for non-perishable supplies
 - [ ] Animations
 - [ ] Accessibility
+- [ ] Add description
 - [ ] Browser testing
 - [X] Option to reset kit
 - [X] Add/remove supply

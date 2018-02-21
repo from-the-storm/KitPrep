@@ -55,6 +55,17 @@ h3 {
   margin: 0 0 2rem 0;
 }
 
+h4 {
+  font-size: 1.1em;
+  padding: 0.5rem 0.5rem 0.75rem 0.5rem;
+  margin: 0;
+  font-weight: normal;
+}
+
+.centre {
+  text-align: center;
+}
+
 footer p {
   font-size: 0.75em;
 }
@@ -119,14 +130,22 @@ button:hover {
   background: #e66f6f;
 }
 
-table button {
+button.add-supply {
   font-size: 0.9em;
   padding: 0.5rem 0.7rem;
+  margin: 0.75rem 0.25rem;
 }
 
-table button.del {
+button.del {
+  font-size: 0.8em;
   padding: 0.3rem 0.5rem;
-  font-weight: bold;
+  height: 100%;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+button.del.hidden {
+  opacity: 0;
 }
 
 /* Sections */
@@ -330,86 +349,63 @@ fieldset .yes-no:last-child {
 
 /* Kit */
 
-table {
+.supply-row, .header-row {
+  display: flex;
   width: 100%;
-  border-radius: 2px;
 }
 
-thead tr {
-  background: #303030;
-  color: #ffffff;
-}
-
-thead th {
-  padding: 1rem;
-}
-
-thead tr th:first-child {
-  text-align: left;
-}
-
-td {
-  padding: 0.5rem;
-  box-sizing: border-box;
-}
-
-td.fit {
-  width: 1%;
-  white-space: no-wrap;
-  text-align: center;
-  padding: 0.5rem;
-}
-
-tr {
+.supply-row > div {
   background: #e5e5e5;
 }
 
-tbody tr:nth-child(odd) {
+.supply-row .header {
+  background: #ffffff;
+}
+
+.supply-row:nth-child(odd) > div {
   background: #f1f1f1;
 }
 
-tbody tr:last-child {
-  background: #ffffff;
+.supply-row .supply-name, .header-row .supply-label {
+  flex-grow: 1;
 }
 
-tbody tr:last-child button {
-  margin: 0.5rem 0;
+.supply-row > div {
+  border: 3px solid #ffffff;
 }
 
-tbody tr:last-child td:hover {
-  background: #ffffff;
-}
-
-table input {
+.supply-row input {
   background: none;
   border: 0;
   padding: 0.5rem;
-  box-sizing: border-box;
   font-size: 1em;
   width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ffffff;
 }
 
-table input[type="date"] {
+.supply-row input[type="date"] {
   font-family: Arial, Helvetica, sans-serif;
   box-sizing: border-box;
   margin-right: 0.5rem;
 }
 
-table input[type="date"]::-webkit-inner-spin-button {
+.supply-row input[type="date"]::-webkit-inner-spin-button {
   display: none;
 }
 
-table input[type=number] {
+.supply-row input[type=number] {
   width: 50px;
   text-align: center;
 }
 
-table tr td:hover {
-  background: #f8d7d0
+.supply-row input:focus {
+  background: #ffffff;
+  border: 1px solid #c1c1c1;
 }
 
-table tr input:focus {
-  background: #ffffff;
+.supply-row > div:hover {
+  background: #f8d7d0
 }
 
 /* Animations */

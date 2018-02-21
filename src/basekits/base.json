@@ -8,5 +8,9 @@
         "name": "Apples",
         "quantity": 12,
         "expiration": 5
+    },
+    {
+        "name": "Thing that doesn't expire",
+        "quantity": 12
     }
 ]
