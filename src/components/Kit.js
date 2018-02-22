@@ -27,8 +27,7 @@ class Kit extends Component {
             loading: true,
             kitContents: []
         })
-        this.addPerishable = this.addPerishable.bind(this)
-        this.addNonPerishable = this.addNonPerishable.bind(this)
+        this.addSupply = this.addSupply.bind(this)
         
         this.removeSupply = this.removeSupply.bind(this)
         this.updateSupply = this.updateSupply.bind(this)
@@ -93,23 +92,8 @@ class Kit extends Component {
         kitRef.set(this.state.kitContents)
     }
 
-    addPerishable() {
-        this.setState(prevState => ({
-            kitContents: [
-                // use the spread syntax to take all supply items in state and push it into a new array. Then we append new supply.
-                // spread syntax allows an iterable such an array to be expanded
-                ...prevState.kitContents,
-                {
-                    id: this.nextId(),
-                    name: "",
-                    quantity: 1,
-                    perishable: true
-                }
-            ]
-        }))
-    }
-
-    addNonPerishable() {
+    addSupply(event) {
+        const supplyType = event.target.id === 'perishable' ? true : false
         this.setState(prevState => ({
             kitContents: [
                 ...prevState.kitContents,
@@ -117,7 +101,7 @@ class Kit extends Component {
                     id: this.nextId(),
                     name: "",
                     quantity: 1,
-                    perishable: false
+                    perishable: supplyType
                 }
             ]
         }))
@@ -180,7 +164,7 @@ class Kit extends Component {
                     )}
                     </tbody>
                 </table>
-                <button className="add-supply" onClick={this.addPerishable}>Add supply</button>
+                <button className="add-supply" id="perishable" onClick={this.addSupply}>Add supply</button>
                 <hr />
                 <h4>Non-Perishables</h4>
                 <table>
@@ -203,7 +187,7 @@ class Kit extends Component {
                     )}
                     </tbody>
                 </table>
-                <button className="add-supply" onClick={this.addNonPerishable}>Add supply</button>
+                <button className="add-supply" id="nonperishable" onClick={this.addSupply}>Add supply</button>
             </div>
         )
     }
