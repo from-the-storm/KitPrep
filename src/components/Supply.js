@@ -20,31 +20,18 @@ class Supply extends Component {
     }
 
     componentWillMount() {
-        const { supplyName, supplyQuantity, daysUntilExpiry } = this.props
-        let expiryDate
-
-        if (daysUntilExpiry === 0) {
-            expiryDate = ''
-        }
-        else {
-            let theDate = new Date()
-            theDate.setDate(theDate.getDate() + daysUntilExpiry)
-            expiryDate = theDate.getFullYear() + '-' + ('0' + (theDate.getMonth()+1)).slice(-2) + '-' + ('0' + theDate.getDate()).slice(-2)
-        }
-
+        const { supplyName, supplyQuantity } = this.props
         this.setState({
             nameOfSupply: supplyName,
-            quantityOfSupply: supplyQuantity,
-            dateOfExpiry: expiryDate
+            quantityOfSupply: supplyQuantity
         })
     }
 
     updateSupply(event) {
-        const id = event.target.id
         const name = event.target.name
         const value = (event.target.type === 'number' && event.target.value) ? parseInt(event.target.value, 10) : event.target.value;
         this.setState({[name]: value})
-        this.props.onChange(this.props.supplyId, id, value)
+        this.props.onChange(this.props.supplyId, name, value)
     }
 
     removeSupply() {
@@ -58,7 +45,6 @@ class Supply extends Component {
                 <td>
                     <input 
                         type="text"
-                        id="name"
                         name="nameOfSupply"
                         placeholder="Your supply"
                         value={this.state.nameOfSupply}
@@ -69,7 +55,6 @@ class Supply extends Component {
                     <input 
                         type="number"
                         name="quantityOfSupply"
-                        id="quantity"
                         min="1"
                         max="999"
                         step="1"
@@ -79,11 +64,10 @@ class Supply extends Component {
                         onChange={this.updateSupply}
                     />
                 </td>
-                {this.props.daysUntilExpiry >= 0 &&
+                {this.props.perishable &&
                 <td>
                     <input 
                         type="date"
-                        id="dateOfExpiry"
                         name="dateOfExpiry"
                         value={this.state.dateOfExpiry}
                         onChange={this.updateSupply}
@@ -101,7 +85,6 @@ class Supply extends Component {
 Supply.propTypes = {
     supplyName: PropTypes.string,
     supplyQuantity: PropTypes.number,
-    daysUntilExpiry: PropTypes.number
 }
 
 export default Supply

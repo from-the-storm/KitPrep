@@ -2,7 +2,6 @@
     {
         "name": "Vancouver thing",
         "quantity": 4,
-        "expiration": 15,
         "perishable": true
     }
 ]

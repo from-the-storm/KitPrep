@@ -2,13 +2,11 @@
     {
         "name": "Kids thing",
         "quantity": 4,
-        "expiration": 13,
         "perishable": true
     },
     {
         "name": "Electricity",
         "quantity": 40,
-        "expiration": 15,
         "perishable": true
     },
     {

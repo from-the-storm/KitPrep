@@ -2,13 +2,11 @@
     {
         "name": "Vehicle thing",
         "quantity": 4,
-        "expiration": 15,
         "perishable": false
     },
     {
         "name": "Electricity",
         "quantity": 40,
-        "expiration": 13,
         "perishable": true
     },
     {

@@ -103,7 +103,6 @@ class Kit extends Component {
                     id: this.nextId(),
                     name: "",
                     quantity: 1,
-                    expiration: 0,
                     perishable: true
                 }
             ]
@@ -132,13 +131,13 @@ class Kit extends Component {
         }))
     }
 
-    updateSupply(supplyId, id, value) {
+    updateSupply(supplyId, name, value) {
         const targetIndex = this.state.kitContents.map(function(el) {
             return el.id
         }).indexOf(supplyId)
 
         this.setState({
-            kitContents: update(this.state.kitContents, {[targetIndex]: {[id]: {$set: value}}})
+            kitContents: update(this.state.kitContents, {[targetIndex]: {[name]: {$set: value}}})
         })
     }
 
@@ -174,7 +173,7 @@ class Kit extends Component {
                             supplyId={item.id}
                             supplyName={item.name}
                             supplyQuantity={item.quantity * this.props.people}
-                            daysUntilExpiry={item.expiration}
+                            perishable={item.perishable}
                             onRemove={this.removeSupply}
                             onChange={this.updateSupply}
                         />

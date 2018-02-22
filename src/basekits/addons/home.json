@@ -2,7 +2,6 @@
     {
         "name": "Homeowner thing",
         "quantity": 4,
-        "expiration": 13,
         "perishable": true
     },
     {
@@ -13,7 +12,6 @@
     {
         "name": "Apples",
         "quantity": 12,
-        "expiration": 22,
         "perishable": true
     }
 ]
