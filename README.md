@@ -15,11 +15,12 @@ The emergency preparedness kit preparator. Made with [Create React App](https://
 - [ ] Print styling
 - [ ] Disabled styling
 - [X] Dynamically-generated id and key for supplies
-- [ ] Support for non-perishable supplies
+- [X] Support for non-perishable supplies
 - [ ] Animations
 - [ ] Accessibility
-- [ ] Add description
 - [ ] Browser testing
+- [ ] Only update state of Kit when we hit save
+- [ ] Change expiration to initialExpiration
 - [X] Option to reset kit
 - [X] Add/remove supply
 - [X] Proptypes
@@ -33,3 +34,4 @@ The emergency preparedness kit preparator. Made with [Create React App](https://
 - [ ] Convert to TypeScript
 - [ ] Better cross-browser styled input elements
 - [ ] Expiry date email warnings
+- [ ] Supply Descriptions?

@@ -10,7 +10,7 @@ class Supply extends Component {
             nameOfSupply: '',
             quantityOfSupply: 0,
         }
-        this.handleSupplyChange = this.handleSupplyChange.bind(this)
+        this.updateSupply = this.updateSupply.bind(this)
         this.removeSupply = this.removeSupply.bind(this)
         this.handleFocus = this.handleFocus.bind(this)
     }
@@ -39,10 +39,12 @@ class Supply extends Component {
         })
     }
 
-    handleSupplyChange(event) {
+    updateSupply(event) {
+        const id = event.target.id
         const name = event.target.name
         const value = (event.target.type === 'number' && event.target.value) ? parseInt(event.target.value, 10) : event.target.value;
         this.setState({[name]: value})
+        this.props.onChange(this.props.supplyId, id, value)
     }
 
     removeSupply() {
@@ -56,32 +58,35 @@ class Supply extends Component {
                 <td>
                     <input 
                         type="text"
+                        id="name"
                         name="nameOfSupply"
                         placeholder="Your supply"
                         value={this.state.nameOfSupply}
-                        onChange={this.handleSupplyChange}
+                        onChange={this.updateSupply}
                     />
                 </td>
                 <td>
                     <input 
                         type="number"
                         name="quantityOfSupply"
+                        id="quantity"
                         min="1"
                         max="999"
                         step="1"
                         onFocus={this.handleFocus}
                         placeholder="#"
                         value={this.state.quantityOfSupply}
-                        onChange={this.handleSupplyChange}
+                        onChange={this.updateSupply}
                     />
                 </td>
                 {this.props.daysUntilExpiry >= 0 &&
                 <td>
                     <input 
                         type="date"
+                        id="dateOfExpiry"
                         name="dateOfExpiry"
                         value={this.state.dateOfExpiry}
-                        onChange={this.handleSupplyChange}
+                        onChange={this.updateSupply}
                     />
                 </td>
                 }

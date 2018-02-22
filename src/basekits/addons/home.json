@@ -8,7 +8,6 @@
     {
         "name": "Electricity",
         "quantity": 40,
-        "expiration": 33,
         "perishable": false
     },
     {

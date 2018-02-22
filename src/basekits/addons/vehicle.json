@@ -14,7 +14,6 @@
     {
         "name": "Apples",
         "quantity": 12,
-        "expiration": 12,
         "perishable": false
     }
 ]

@@ -2,6 +2,22 @@ import React, { Component } from 'react'
 import Supply from './Supply'
 
 import PropTypes from 'prop-types'
+import update from 'immutability-helper'
+
+import fire from '../fire'
+
+let uuid = guid()
+let kitRef = fire.database().ref('prepped-kits').child(uuid)
+
+// Generate a (non-compliant) GUID for use as URL and Firebase reference
+// Update this when we hit two billion users
+function guid() {
+    function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16).substring(1)
+    }
+    return 'my-kit-' + s4() + s4() + '-' + s4()
+}
 
 class Kit extends Component {
 
@@ -13,11 +29,17 @@ class Kit extends Component {
         })
         this.addPerishable = this.addPerishable.bind(this)
         this.addNonPerishable = this.addNonPerishable.bind(this)
+        
         this.removeSupply = this.removeSupply.bind(this)
+        this.updateSupply = this.updateSupply.bind(this)
+       
         this.nextId = this.nextId.bind(this)
+        this.saveKit = this.saveKit.bind(this)
     }
 
     componentWillMount() {
+
+        // Assemble the kit
         let kit = require('../basekits/base.json')
         
         let city = this.props.city
@@ -48,11 +70,15 @@ class Kit extends Component {
         }
         let baseId = 0;
         for (let item of kit) {
-            item.id = 'base-' + baseId++;
+            item.id = 'base-' + baseId++
         }
         this.setState({
             kitContents: kit
         })
+
+        // Set initial state and store it in Firebase
+        kitRef.set(kit)
+
     }
 
     componentDidMount() {
@@ -63,6 +89,10 @@ class Kit extends Component {
             }), 1500)
     }
 
+    saveKit() {
+        kitRef.set(this.state.kitContents)
+    }
+
     addPerishable() {
         this.setState(prevState => ({
             kitContents: [
@@ -71,7 +101,7 @@ class Kit extends Component {
                 ...prevState.kitContents,
                 {
                     id: this.nextId(),
-                    name: "Your supply",
+                    name: "",
                     quantity: 1,
                     expiration: 0,
                     perishable: true
@@ -86,7 +116,7 @@ class Kit extends Component {
                 ...prevState.kitContents,
                 {
                     id: this.nextId(),
-                    name: "Your supply",
+                    name: "",
                     quantity: 1,
                     perishable: false
                 }
@@ -95,12 +125,21 @@ class Kit extends Component {
     }
 
     removeSupply(supplyId) {
-        console.log(supplyId)
         this.setState(prevState => ({
             // filter passes in a supplyId and performs a logical check when the supplyId's id is not equal to the id
             // it will return a new array that has removed the item where this condition is true
             kitContents: prevState.kitContents.filter(item => item.id !== supplyId)
         }))
+    }
+
+    updateSupply(supplyId, id, value) {
+        const targetIndex = this.state.kitContents.map(function(el) {
+            return el.id
+        }).indexOf(supplyId)
+
+        this.setState({
+            kitContents: update(this.state.kitContents, {[targetIndex]: {[id]: {$set: value}}})
+        })
     }
 
     nextId() {
@@ -117,6 +156,7 @@ class Kit extends Component {
         return (
             <div>
                 <h3>Your kit is prepped!</h3>
+                <button onClick={this.saveKit}>Save Kit</button>
                 <h4>Perishables</h4>
                 <table>
                     <thead>
@@ -136,6 +176,7 @@ class Kit extends Component {
                             supplyQuantity={item.quantity * this.props.people}
                             daysUntilExpiry={item.expiration}
                             onRemove={this.removeSupply}
+                            onChange={this.updateSupply}
                         />
                     )}
                     </tbody>
@@ -158,6 +199,7 @@ class Kit extends Component {
                             supplyName={item.name}
                             supplyQuantity={item.quantity * this.props.people}
                             onRemove={this.removeSupply}
+                            onChange={this.updateSupply}
                         />
                     )}
                     </tbody>
