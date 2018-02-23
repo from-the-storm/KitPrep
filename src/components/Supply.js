@@ -7,6 +7,7 @@ class Supply extends Component {
     constructor(props){
         super(props)
         this.state = {
+            // Set initial local state of each supply
             name: '',
             quantityOfSupply: 0,
         }
@@ -16,11 +17,13 @@ class Supply extends Component {
     }
 
     handleFocus(event) {
+        // Select on the number inputs so that it's clearer that they can be edited
         event.target.select()
     }
 
     componentWillMount() {
         const { supplyName, supplyQuantity } = this.props
+        // Set the state from the Kit component's props
         this.setState({
             name: supplyName,
             quantityOfSupply: supplyQuantity
@@ -28,18 +31,20 @@ class Supply extends Component {
     }
 
     updateSupply(event) {
+        // Update state of supply based on user's input
         const name = event.target.name
         const value = (event.target.type === 'number' && event.target.value) ? parseInt(event.target.value, 10) : event.target.value;
         this.setState({[name]: value})
+        // Allow the Kit component to access the changed supply
         this.props.onChange(this.props.supplyId, name, value)
     }
 
     removeSupply() {
+        // Remove the supply from the Kit component
         this.props.onRemove(this.props.supplyId)
     }
 
     render() {
-
         return (
             <tr>
                 <td>
@@ -64,7 +69,9 @@ class Supply extends Component {
                         onChange={this.updateSupply}
                     />
                 </td>
-                {this.props.perishable &&
+                {
+                // if the supply is perishable create an additional column
+                this.props.perishable &&
                 <td>
                     <input 
                         type="date"

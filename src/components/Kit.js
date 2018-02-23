@@ -8,8 +8,9 @@ import fire from '../fire'
 
 import { Link } from 'react-router-dom'
 
-let uuid = ''
+let uuId = ''
 let kitRef = ''
+let kitId = ''
 
 class Kit extends Component {
 
@@ -18,6 +19,7 @@ class Kit extends Component {
         this.state = ({
             loading: true,
             savedKit: false,
+            newSavedKit: false,
             kitContents: []
         })
         this.addSupply = this.addSupply.bind(this)
@@ -30,48 +32,50 @@ class Kit extends Component {
     }
 
     componentWillMount() {
-
-        // Check if there is an existing kit on Firebase
+        // If the Preparator component found a matching kit ID on Firebase
         if (this.props.saved) {
-            const kitId = window.location.pathname.substr(1)
+            kitId = window.location.pathname.substr(1)
+            kitRef = fire.database().ref('prepped-kits').child(kitId)
             return fire.database().ref('prepped-kits/' + kitId).once('value').then((snapshot) => {
-                const savedKit = snapshot.val() || undefined
-                if (savedKit) {
-                    // If a kit exists that matches the URL, then set the state
+                const savedKitContents = snapshot.val() || undefined
+                if (savedKitContents) {
+                    // Set the contents of the Firebase ref to kitContents' state
                     this.setState({
-                        kitContents: savedKit
+                        kitContents: savedKitContents,
+                        savedKit: true
                     })
                 }
             })
         } 
-        // If not, then set up the kit normally
+        // If no matching kit was found, set up a default kit
         else {
-            uuid = guid()
-            kitRef = fire.database().ref('prepped-kits').child(uuid)
-
-            // Generate a (non-compliant) GUID for use as URL and Firebase reference. Update this when we hit two or three billion users
+            // Generate a (non-compliant) GUID for use as a reference in Firebase.
+            // TODO: Make this more reliable when we hit two billion users.
+            uuId = guid()
+            kitRef = fire.database().ref('prepped-kits').child(uuId)
             function guid() {
                 function s4() {
-                return Math.floor((1 + Math.random()) * 0x10000)
-                    .toString(16).substring(1)
+                    return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1)
                 }
                 return 'my-kit-' + s4() + s4() + '-' + s4()
             }
-            // Assemble the kit
+            // Assemble the base kit
             let kit = require('../basekits/base.json')
             
+            // Get the user-selected city
             let city = this.props.city
+
             // Avoid loading other files
             city = city.replace('.', '').replace('/', '')
-            const cityKit = require('../basekits/cities/' + city + '.json')
 
-            // Add the city-specific kit to the basekit
+            // Add on the city's kit
+            const cityKit = require('../basekits/cities/' + city + '.json')
             kit = kit.concat(cityKit)
 
             // Add addon kit(s) depending on user's selection
             if (this.props.kids === 'yes') { 
                 const kidsKit = require('../basekits/addons/kids.json')
-                // Prioritize the youths
+                // Prioritize the youths by adding them first
                 kit = kidsKit.concat(kit)
             }
             if (this.props.pets === 'yes') { 
@@ -86,10 +90,14 @@ class Kit extends Component {
                 const vehicleKit = require('../basekits/addons/vehicle.json')
                 kit = kit.concat(vehicleKit)
             }
+
+            // Generate a unique supply ID
             let baseId = 0;
             for (let item of kit) {
                 item.id = 'base-' + baseId++
             }
+
+            // Set state to kit object
             this.setState({
                 kitContents: kit
             })
@@ -97,24 +105,31 @@ class Kit extends Component {
     }
 
     componentDidMount() {
-        // Fake a longer load
+        // Fake a longer load for demo
         setTimeout(() => 
             this.setState({
                 loading: false
-            }), 1500)
+            }),
+        1500)
     }
 
     saveKit() {
+        // Save or update the kit in Firebase
         kitRef.set(this.state.kitContents)
+        
         // Update local state
-        this.setState({
-            savedKit: true
-        })
+        if (!this.state.savedKit) {
+            this.setState({
+                newSavedKit: true
+            })
+        }
     }
 
     addSupply(event) {
+        // Add a new perishable or nonperishable supply
         const supplyType = event.target.id === 'perishable' ? true : false
         this.setState(prevState => ({
+            // Append the new supply
             kitContents: [
                 ...prevState.kitContents,
                 {
@@ -129,38 +144,52 @@ class Kit extends Component {
 
     removeSupply(supplyId) {
         this.setState(prevState => ({
-            // filter passes in a supplyId and performs a logical check when the supplyId's id is not equal to the id
-            // it will return a new array that has removed the item where this condition is true
+            // Filter passes in a supplyId and performs a logical check when the supplyId's id is not equal to the id
+            // It will return a new array that has removed the item where this condition is true
             kitContents: prevState.kitContents.filter(item => item.id !== supplyId)
         }))
     }
 
     updateSupply(supplyId, name, value) {
+        // Find the index of the supply that's been updated
         const targetIndex = this.state.kitContents.map(function(el) {
             return el.id
         }).indexOf(supplyId)
 
+        // Update the kitContents object
         this.setState({
             kitContents: update(this.state.kitContents, {[targetIndex]: {[name]: {$set: value}}})
         })
     }
 
     nextId() {
+        // For supplies that the user adds, generate a unique ID
         this.customId = this.customId || 0
         return 'custom-' + this.customId++
     }
     
     render() {
-        const { loading } = this.state
+        const { loading, savedKit } = this.state
         if (loading) {
+            // Display the loading spinner using the CSS :empty selector
             return null
         }
 
         return (
             <div>
                 <h3>Your kit is prepped!</h3>
-                <Link to={{ pathname: '/' + uuid }} onClick={this.saveKit}>Save Kit</Link>
-                {this.state.savedKit && <p>Your Kit has been saved to <code><Link to={{ pathname: '/' + uuid }}>kitprep.ca/{uuid}</Link></code></p>}
+                {
+                !savedKit ? 
+                    // If there's no savedKit, link to it to update the route
+                    <Link to={{ pathname: '/' + uuId }} onClick={this.saveKit} className="save">Save Kit</Link> : 
+                    // Otherwise just update it
+                    <button onClick={this.saveKit} className="save">Save Kit</button>
+                }
+                {
+                // If there's a newly saved kit, display the link to it
+                this.state.newSavedKit && 
+                    <p>Your Kit has been saved to <code><Link to={{ pathname: '/' + uuId }}>kitprep.ca/{uuId}</Link></code></p>
+                }
                 <h4>Perishables</h4>
                 <table>
                     <thead>
@@ -171,7 +200,9 @@ class Kit extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                    {this.state.kitContents.filter(item => item.perishable === true).map(item =>
+                    {
+                    // Map the perishables
+                    this.state.kitContents.filter(item => item.perishable === true).map(item =>
                         <Supply 
                             // From react docs: We don’t recommend using indexes for keys if the order of items may change. This can negatively impact performance and may cause issues with component state.
                             key={item.id}
@@ -196,7 +227,9 @@ class Kit extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                    {this.state.kitContents.filter(item => item.perishable === false).map(item =>
+                    {
+                    // Map the nonperishables
+                    this.state.kitContents.filter(item => item.perishable === false).map(item =>
                         <Supply 
                             key={item.id}
                             supplyId={item.id}

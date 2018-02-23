@@ -16,8 +16,11 @@ class Preparator extends Component {
     constructor(props) {
         super(props)
         this.state = ({
+            // If a kit already exists at the current path
             saved: false,
+            // If the user has filled in the form
             prepped: false,
+            // Form variables
             people: 1,
             city: '',
             kids: undefined,
@@ -35,10 +38,11 @@ class Preparator extends Component {
 
     componentWillMount() {
         const kitId = window.location.pathname
-        // Check if we're on the home page
+        // Check if we're not on the home page
         if (kitId !== '/') {
             return fire.database().ref('prepped-kits/' + kitId).once('value').then((snapshot) => {
                 const savedKit = snapshot.val() || undefined
+                // If there's an existing kit in Firebase
                 if (savedKit) {
                     this.setState({
                         saved: true,
@@ -59,6 +63,7 @@ class Preparator extends Component {
         this.setState({
             prepped: true
         })
+        // Prevent default because it's a form submission
         event.preventDefault()
     }
 

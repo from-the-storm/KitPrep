@@ -141,7 +141,7 @@ hr {
   padding: 2rem 0 1rem;
 }
 
-button {
+button, .save {
   padding: 1rem;
   border: 0;
   background: #303030;
@@ -150,10 +150,12 @@ button {
   font-size: 1.1em;
   cursor: pointer;
   border-radius: 2px;
+  display: inline-block;
 }
 
-button:hover {
+button:hover, .save:hover {
   background: #e66f6f;
+  color: #ffffff;
 }
 
 button.add-supply {
