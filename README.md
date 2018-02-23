@@ -20,13 +20,14 @@ The emergency preparedness kit preparator. Made with [Create React App](https://
 - [ ] Accessibility
 - [ ] Browser testing
 - [ ] Only update state of Kit when we hit save
-- [ ] Change expiration to initialExpiration
+- [X] Remove initial expiration
 - [X] Option to reset kit
 - [X] Add/remove supply
 - [X] Proptypes
 - [X] Add state to supplies
 - [X] Tie 'checked' to state for resetting purposes
-- [ ] Store state in Firebase
+- [ ] Store state of Kit in Firebase
+- [ ] Store state of Preparator in Firebase
 - [ ] Generate unique URLs for people to "save" their kits
 - [ ] Demoisten
 

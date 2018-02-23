@@ -9,11 +9,14 @@ import Number from './question-types/Number'
 import Selector from './question-types/Selector'
 import YesNo from './question-types/YesNo'
 
+import fire from '../fire'
+
 class Preparator extends Component {
     
     constructor(props) {
         super(props)
         this.state = ({
+            saved: false,
             prepped: false,
             people: 1,
             city: '',
@@ -30,12 +33,29 @@ class Preparator extends Component {
         this.handleReset = this.handleReset.bind(this)
     }
 
+    componentWillMount() {
+        const kitId = window.location.pathname
+        // Check if we're on the home page
+        if (kitId !== '/') {
+            return fire.database().ref('prepped-kits/' + kitId).once('value').then((snapshot) => {
+                const savedKit = snapshot.val() || undefined
+                if (savedKit) {
+                    this.setState({
+                        saved: true,
+                        prepped: true
+                    })
+                }
+            })
+        }
+    }
+
     handleReset(event) {
         this.setState(this.startingPoint)
         event.preventDefault()
     }
 
     handleSubmit(event) {
+        // If the submit button is enabled and clicked we can set state to prepped.
         this.setState({
             prepped: true
         })
@@ -43,12 +63,14 @@ class Preparator extends Component {
     }
 
     handleFormChange(event) {
+        // Whenever a form element changes we change the corresponding value in state.
         const name = event.target.name
         const value = (event.target.type === 'number' && event.target.value) ? parseInt(event.target.value, 10) : event.target.value
         this.setState({[name]: value})
     }
    
     render() {
+        // Check to see if all form elements are filled in
         // const { people, city, kids, pets, home, vehicle } = this.state
         const enablePartTwo = true
             // people > 0 &&
@@ -59,7 +81,6 @@ class Preparator extends Component {
             // pets &&
             // home &&
             // vehicle
-
         return(
             <div>
                 <Header />
@@ -104,7 +125,7 @@ class Preparator extends Component {
                     <div id="prepped">
                         <ErrorBoundary>
                             <Kit
-                            // set initial state from Firebase and save people, city, etc.
+                                saved={this.state.saved}
                                 people={parseInt(this.state.people, 10)}
                                 city={this.state.city}
                                 kids={this.state.kids}

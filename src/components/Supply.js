@@ -7,7 +7,7 @@ class Supply extends Component {
     constructor(props){
         super(props)
         this.state = {
-            nameOfSupply: '',
+            name: '',
             quantityOfSupply: 0,
         }
         this.updateSupply = this.updateSupply.bind(this)
@@ -22,7 +22,7 @@ class Supply extends Component {
     componentWillMount() {
         const { supplyName, supplyQuantity } = this.props
         this.setState({
-            nameOfSupply: supplyName,
+            name: supplyName,
             quantityOfSupply: supplyQuantity
         })
     }
@@ -45,9 +45,9 @@ class Supply extends Component {
                 <td>
                     <input 
                         type="text"
-                        name="nameOfSupply"
+                        name="name"
                         placeholder="Your supply"
-                        value={this.state.nameOfSupply}
+                        value={this.state.name}
                         onChange={this.updateSupply}
                     />
                 </td>

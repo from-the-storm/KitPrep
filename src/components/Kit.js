@@ -9,8 +9,7 @@ import fire from '../fire'
 let uuid = guid()
 let kitRef = fire.database().ref('prepped-kits').child(uuid)
 
-// Generate a (non-compliant) GUID for use as URL and Firebase reference
-// Update this when we hit two billion users
+// Generate a (non-compliant) GUID for use as URL and Firebase reference. Update this when we hit two or three billion users
 function guid() {
     function s4() {
       return Math.floor((1 + Math.random()) * 0x10000)
@@ -25,6 +24,7 @@ class Kit extends Component {
         super(props)
         this.state = ({
             loading: true,
+            savedKit: false,
             kitContents: []
         })
         this.addSupply = this.addSupply.bind(this)
@@ -38,46 +38,58 @@ class Kit extends Component {
 
     componentWillMount() {
 
-        // Assemble the kit
-        let kit = require('../basekits/base.json')
-        
-        let city = this.props.city
-        // Avoid loading other files
-        city = city.replace('.', '').replace('/', '')
-        const cityKit = require('../basekits/cities/' + city + '.json')
+        // Check if there is an existing kit on Firebase
+        if (this.props.saved) {
+            const kitId = window.location.pathname.substr(1)
+            return fire.database().ref('prepped-kits/' + kitId).once('value').then((snapshot) => {
+                const savedKit = snapshot.val() || undefined
+                if (savedKit) {
+                    // If a kit exists that matches the URL, then set the state
+                    this.setState({
+                        kitContents: savedKit
+                    })
+                }
+            })
+        } 
+        // If not, then set up the kit normally
+        else {
+            // Assemble the kit
+            let kit = require('../basekits/base.json')
+            
+            let city = this.props.city
+            // Avoid loading other files
+            city = city.replace('.', '').replace('/', '')
+            const cityKit = require('../basekits/cities/' + city + '.json')
 
-        // Add the city-specific kit to the basekit
-        kit = kit.concat(cityKit)
+            // Add the city-specific kit to the basekit
+            kit = kit.concat(cityKit)
 
-        // Add addon kit(s) depending on user's selection
-        if (this.props.kids === 'yes') { 
-            const kidsKit = require('../basekits/addons/kids.json')
-            // Prioritize the youths
-            kit = kidsKit.concat(kit)
+            // Add addon kit(s) depending on user's selection
+            if (this.props.kids === 'yes') { 
+                const kidsKit = require('../basekits/addons/kids.json')
+                // Prioritize the youths
+                kit = kidsKit.concat(kit)
+            }
+            if (this.props.pets === 'yes') { 
+                const petsKit = require('../basekits/addons/pets.json')
+                kit = kit.concat(petsKit)
+            }
+            if (this.props.home === 'yes') { 
+                const homeOwnerKit = require('../basekits/addons/home.json')
+                kit = kit.concat(homeOwnerKit)
+            }
+            if (this.props.vehicle === 'yes') { 
+                const vehicleKit = require('../basekits/addons/vehicle.json')
+                kit = kit.concat(vehicleKit)
+            }
+            let baseId = 0;
+            for (let item of kit) {
+                item.id = 'base-' + baseId++
+            }
+            this.setState({
+                kitContents: kit
+            })
         }
-        if (this.props.pets === 'yes') { 
-            const petsKit = require('../basekits/addons/pets.json')
-            kit = kit.concat(petsKit)
-        }
-        if (this.props.home === 'yes') { 
-            const homeOwnerKit = require('../basekits/addons/home.json')
-            kit = kit.concat(homeOwnerKit)
-        }
-        if (this.props.vehicle === 'yes') { 
-            const vehicleKit = require('../basekits/addons/vehicle.json')
-            kit = kit.concat(vehicleKit)
-        }
-        let baseId = 0;
-        for (let item of kit) {
-            item.id = 'base-' + baseId++
-        }
-        this.setState({
-            kitContents: kit
-        })
-
-        // Set initial state and store it in Firebase
-        kitRef.set(kit)
-
     }
 
     componentDidMount() {
@@ -89,7 +101,12 @@ class Kit extends Component {
     }
 
     saveKit() {
+        // Save current state to Firebase
         kitRef.set(this.state.kitContents)
+        // Update local state
+        this.setState({
+            savedKit: true
+        })
     }
 
     addSupply(event) {
@@ -106,6 +123,7 @@ class Kit extends Component {
             ]
         }))
     }
+
 
     removeSupply(supplyId) {
         this.setState(prevState => ({
@@ -132,6 +150,7 @@ class Kit extends Component {
     
     render() {
         const { loading } = this.state
+        const fullPath = window.location.href
         if (loading) {
             return null
         }
@@ -140,6 +159,7 @@ class Kit extends Component {
             <div>
                 <h3>Your kit is prepped!</h3>
                 <button onClick={this.saveKit}>Save Kit</button>
+                {this.state.savedKit && <p>Your Kit has been saved to <code><a href="localhost:3000/123">kitprep.ca/{uuid}</a></code></p>}
                 <h4>Perishables</h4>
                 <table>
                     <thead>
