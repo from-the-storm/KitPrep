@@ -6,17 +6,10 @@ import update from 'immutability-helper'
 
 import fire from '../fire'
 
-let uuid = guid()
-let kitRef = fire.database().ref('prepped-kits').child(uuid)
+import { Link } from 'react-router-dom'
 
-// Generate a (non-compliant) GUID for use as URL and Firebase reference. Update this when we hit two or three billion users
-function guid() {
-    function s4() {
-      return Math.floor((1 + Math.random()) * 0x10000)
-        .toString(16).substring(1)
-    }
-    return 'my-kit-' + s4() + s4() + '-' + s4()
-}
+let uuid = ''
+let kitRef = ''
 
 class Kit extends Component {
 
@@ -53,6 +46,17 @@ class Kit extends Component {
         } 
         // If not, then set up the kit normally
         else {
+            uuid = guid()
+            kitRef = fire.database().ref('prepped-kits').child(uuid)
+
+            // Generate a (non-compliant) GUID for use as URL and Firebase reference. Update this when we hit two or three billion users
+            function guid() {
+                function s4() {
+                return Math.floor((1 + Math.random()) * 0x10000)
+                    .toString(16).substring(1)
+                }
+                return 'my-kit-' + s4() + s4() + '-' + s4()
+            }
             // Assemble the kit
             let kit = require('../basekits/base.json')
             
@@ -101,7 +105,6 @@ class Kit extends Component {
     }
 
     saveKit() {
-        // Save current state to Firebase
         kitRef.set(this.state.kitContents)
         // Update local state
         this.setState({
@@ -123,7 +126,6 @@ class Kit extends Component {
             ]
         }))
     }
-
 
     removeSupply(supplyId) {
         this.setState(prevState => ({
@@ -150,7 +152,6 @@ class Kit extends Component {
     
     render() {
         const { loading } = this.state
-        const fullPath = window.location.href
         if (loading) {
             return null
         }
@@ -158,8 +159,8 @@ class Kit extends Component {
         return (
             <div>
                 <h3>Your kit is prepped!</h3>
-                <button onClick={this.saveKit}>Save Kit</button>
-                {this.state.savedKit && <p>Your Kit has been saved to <code><a href="localhost:3000/123">kitprep.ca/{uuid}</a></code></p>}
+                <Link to={{ pathname: '/' + uuid }} onClick={this.saveKit}>Save Kit</Link>
+                {this.state.savedKit && <p>Your Kit has been saved to <code><Link to={{ pathname: '/' + uuid }}>kitprep.ca/{uuid}</Link></code></p>}
                 <h4>Perishables</h4>
                 <table>
                     <thead>
