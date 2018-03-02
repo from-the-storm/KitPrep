@@ -200,11 +200,11 @@ button.del.hidden {
   position: relative;
 }
 
-.prepper {
+.hide{
   display: none;
 }
 
-.prepper.show {
+.show {
   display: inline-block;
 }
 

@@ -16,9 +16,6 @@ class Preparator extends Component {
     constructor(props) {
         super(props)
         this.state = ({
-            // If a kit already exists at the current path
-            saved: false,
-            // If the user has filled in the form
             prepped: false,
             // Form variables
             people: 1,
@@ -34,6 +31,7 @@ class Preparator extends Component {
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleFormChange = this.handleFormChange.bind(this)
         this.handleReset = this.handleReset.bind(this)
+        this.handleSave = this.handleSave.bind(this)
     }
 
     componentWillMount() {
@@ -55,6 +53,9 @@ class Preparator extends Component {
 
     handleReset(event) {
         this.setState(this.startingPoint)
+        this.setState({
+            reset: true
+        })
         event.preventDefault()
     }
 
@@ -73,8 +74,15 @@ class Preparator extends Component {
         const value = (event.target.type === 'number' && event.target.value) ? parseInt(event.target.value, 10) : event.target.value
         this.setState({[name]: value})
     }
-   
+
+    handleSave() {
+        this.setState({
+            saved: true
+        })
+    }
+  
     render() {
+
         // Check to see if all form elements are filled in
         // const { people, city, kids, pets, home, vehicle } = this.state
         const enablePartTwo = true
@@ -110,14 +118,14 @@ class Preparator extends Component {
                             <div id="buttons">
                                 <button 
                                     type="submit" 
-                                    className={this.state.prepped ? 'prepper hide' : 'prepper show'}
+                                    className={this.state.prepped ? 'hide' : 'show'}
                                     disabled={!enableSubmit}>
                                     Prep my kit
                                 </button>
                                 <button 
                                     onClick={this.handleReset}
                                     type="submit"
-                                    className={this.state.prepped ? 'prepper show' : 'prepper hide'}
+                                    className={this.state.prepped ? 'show' : 'hide'}
                                     disabled={!this.state.prepped}>
                                     Reset my kit
                                 </button>
@@ -130,6 +138,8 @@ class Preparator extends Component {
                     <div id="prepped">
                         <ErrorBoundary>
                             <Kit
+                                onClick={this.handleSave}
+                                reset={this.state.reset}
                                 saved={this.state.saved}
                                 people={parseInt(this.state.people, 10)}
                                 city={this.state.city}

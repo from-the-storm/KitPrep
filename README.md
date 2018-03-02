@@ -30,6 +30,7 @@ The emergency preparedness kit preparator. Made with [Create React App](https://
 - [ ] Handle resetting existing kits
 - [ ] Store state of Preparator in Firebase
 - [X] Generate unique URLs for people to "save" their kits
+- [ ] Add "copy to clipboard" or "share" link next to custom URL
 - [ ] Demoisten
 
 ## To Do - Future Release
