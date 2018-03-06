@@ -100,22 +100,28 @@ class Preparator extends Component {
                 <section id="prep">
                     <div>
                         <form onSubmit={this.handleSubmit}>
-                            <div id="one" className="step">
-                                <fieldset disabled={this.state.prepped}>
-                                    <Number directions="Prep my kit for" name="people" selection={this.state.people} handleFormChange={this.handleFormChange} />
-                                    <Selector people={this.state.people} name="city" selection={this.state.city} handleFormChange={this.handleFormChange} />
-                                </fieldset>
-                            </div>
-                            <div id="two" className={enablePartTwo ? 'step clear' : 'step blurred'}>
-                                <fieldset disabled={!enablePartTwo || this.state.prepped}>
-                                    <legend>Customize</legend>
-                                    <YesNo question="Do you have young kids?" name="kids" selection={this.state.kids} handleFormChange={this.handleFormChange} />
-                                    <YesNo question="Own any pets?" name="pets" selection={this.state.pets} handleFormChange={this.handleFormChange} />
-                                    <YesNo question="Got a vehicle?" name="vehicle" selection={this.state.vehicle} handleFormChange={this.handleFormChange} />
-                                    <YesNo question="Own your home?" name="home" selection={this.state.home} handleFormChange={this.handleFormChange} />
-                                </fieldset>                 
-                            </div>
-                            <div id="buttons">
+                            {!this.state.prepped &&
+                                // Don't render the form if there's a prepped kit
+                                <div>
+                                    <div id="one" className="step">
+                                        <fieldset>
+                                            <Number directions="Prep my kit for" name="people" selection={this.state.people} handleFormChange={this.handleFormChange} />
+                                            <Selector people={this.state.people} name="city" selection={this.state.city} handleFormChange={this.handleFormChange} />
+                                        </fieldset>
+                                    </div>
+                                    <div id="two" className={enablePartTwo ? 'step clear' : 'step blurred'}>
+                                        <fieldset>
+                                            <legend>Customize</legend>
+                                            <YesNo question="Do you have young kids?" name="kids" selection={this.state.kids} handleFormChange={this.handleFormChange} />
+                                            <YesNo question="Own any pets?" name="pets" selection={this.state.pets} handleFormChange={this.handleFormChange} />
+                                            <YesNo question="Got a vehicle?" name="vehicle" selection={this.state.vehicle} handleFormChange={this.handleFormChange} />
+                                            <YesNo question="Own your home?" name="home" selection={this.state.home} handleFormChange={this.handleFormChange} />
+                                        </fieldset>                 
+                                    </div>
+                                </div>
+                            }
+                            <div id="controls" className={this.state.prepped ? 'striped' : ''}>
+                                <h3 className={this.state.prepped ? 'block' : 'hide'}>Your kit is prepped!</h3>
                                 <button 
                                     type="submit" 
                                     className={this.state.prepped ? 'hide' : 'show'}

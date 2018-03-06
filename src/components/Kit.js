@@ -174,18 +174,17 @@ class Kit extends Component {
 
         return (
             <div>
-                <h3>Your kit is prepped!</h3>
                 {
                 !this.props.saved ? 
                     // If there's no savedKit, link to it to update the route
-                    <Link to={{ pathname: '/' + uuId }} onClick={this.saveKit} className="save">Save Kit</Link> : 
+                    <Link to={{ pathname: '/' + uuId }} onClick={this.saveKit} className="save">Save My Kit</Link> : 
                     // Otherwise just update it
-                    <button onClick={this.saveKit} className="save">Save Kit</button>
+                    <a onClick={this.saveKit} className="save">Save My Kit</a>
                 }
                 {
                 // If there's a saved kit, display the link to it
                 this.props.saved && 
-                    <p>Your Kit is saved to <code><Link to={{ pathname: '/' + window.location.pathname.substr(1) }}>kitprep.ca/{window.location.pathname.substr(1)}</Link></code></p>
+                    <p className="savedKit">Your Kit is saved to <code><Link to={{ pathname: '/' + window.location.pathname.substr(1) }}>kitprep.ca/{window.location.pathname.substr(1)}</Link></code></p>
                 }
                 <h4>Perishables</h4>
                 <table>

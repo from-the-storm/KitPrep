@@ -61,10 +61,20 @@ h3 {
   margin: 0 0 2rem 0;
 }
 
+#controls h3 {
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
 h4 {
   font-size: 1.6em;
   margin-bottom: 0.5rem;
   padding: 0.75rem 0;
+}
+
+p.savedKit {
+  display: inline-block;
+  margin: 0 1rem;
 }
 
 code a {
@@ -134,11 +144,14 @@ hr {
   background: #c2c2c2;
 }
 
-#buttons {
-  padding: 2rem;
+#controls {
   max-width: 1080px;
   margin: 0 auto;
-  padding: 2rem 0 1rem;
+  padding-top: 2rem;
+}
+
+#controls.striped {
+  border-top: 1px solid #c2c2c2;
 }
 
 button, .save {
@@ -147,7 +160,7 @@ button, .save {
   background: #303030;
   color: #ffffff;
   text-transform: uppercase;
-  font-size: 1.1em;
+  font-size: 1em;
   cursor: pointer;
   border-radius: 2px;
   display: inline-block;
@@ -206,6 +219,10 @@ button.del.hidden {
 
 .show {
   display: inline-block;
+}
+
+.block {
+  display: block;
 }
 
 #prepped {
