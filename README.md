@@ -12,13 +12,14 @@ The emergency preparedness kit preparator. Made with [Create React App](https://
 - [X] Create single supply component
 - [X] Basic styling and image assets
 - [ ] Mobile styling
-- [ ] Print styling
-- [ ] Disabled styling
+- [ ] Print button and print styling
+- [X] Disabled styling
 - [X] Dynamically-generated id and key for supplies
 - [X] Support for non-perishable supplies
 - [ ] Animations
 - [ ] Accessibility
 - [ ] Browser testing
+- [ ] Update Firebase rules
 - [X] Only update state of Kit when we hit save
 - [X] Remove initial expiration
 - [X] Option to reset kit

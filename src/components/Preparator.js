@@ -82,18 +82,16 @@ class Preparator extends Component {
     }
   
     render() {
-
         // Check to see if all form elements are filled in
-        // const { people, city, kids, pets, home, vehicle } = this.state
-        const enablePartTwo = true
-            // people > 0 &&
-            // city
-        const enableSubmit = true
-            // enablePartTwo &&
-            // kids &&
-            // pets &&
-            // home &&
-            // vehicle
+        const { people, city, kids, pets, home, vehicle } = this.state
+        let enablePartTwo = false
+        let enableSubmit = false
+        if (people > 0 && city) {
+            enablePartTwo = true
+        }
+        if (enablePartTwo && kids && pets && home && vehicle) {
+            enableSubmit = true
+        }
         return(
             <div>
                 <Header />
@@ -110,7 +108,7 @@ class Preparator extends Component {
                                         </fieldset>
                                     </div>
                                     <div id="two" className={enablePartTwo ? 'step clear' : 'step blurred'}>
-                                        <fieldset>
+                                        <fieldset disabled={!enablePartTwo}>
                                             <legend>Customize</legend>
                                             <YesNo question="Do you have young kids?" name="kids" selection={this.state.kids} handleFormChange={this.handleFormChange} />
                                             <YesNo question="Own any pets?" name="pets" selection={this.state.pets} handleFormChange={this.handleFormChange} />
@@ -121,7 +119,6 @@ class Preparator extends Component {
                                 </div>
                             }
                             <div id="controls" className={this.state.prepped ? 'striped' : ''}>
-                                <h3 className={this.state.prepped ? 'block' : 'hide'}>Your kit is prepped!</h3>
                                 <button 
                                     type="submit" 
                                     className={this.state.prepped ? 'hide' : 'show'}

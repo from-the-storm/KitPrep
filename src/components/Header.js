@@ -6,7 +6,7 @@ const Header = () => (
         <div>
             <div>
                 <h1>KitPrep</h1>
-                <h2>The emergency prep kit preparator.<a href="#to-go"><sup>*</sup></a></h2>
+                <h2>The emergency prep kit preparator.</h2>
             </div>
             <div>
                 <img src={supplies} alt="KitPrep" />
