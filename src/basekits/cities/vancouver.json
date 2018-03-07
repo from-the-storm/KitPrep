@@ -1,7 +1,8 @@
 [
     {
-        "name": "Vancouver thing",
-        "quantity": 4,
-        "perishable": true
+        "name": "Map of Vancouver Disaster Support Hubs [https://goo.gl/FaKnZL]",
+        "quantity": 1,
+        "perishable": false,
+        "shareable": true
     }
 ]

@@ -11,7 +11,7 @@ The emergency preparedness kit preparator. Made with [Create React App](https://
 - [X] Basic error handling
 - [X] Create single supply component
 - [X] Basic styling and image assets
-- [ ] Mobile styling
+- [X] Basic mobile styling
 - [ ] Print button and print styling
 - [X] Disabled styling
 - [X] Dynamically-generated id and key for supplies
@@ -39,3 +39,4 @@ The emergency preparedness kit preparator. Made with [Create React App](https://
 - [ ] Better cross-browser styled input elements
 - [ ] Expiry date email warnings
 - [ ] Supply Descriptions?
+- [ ] Better mobile styling

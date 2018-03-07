@@ -6,6 +6,7 @@
 5: Form
 6: Kit
 7: Animations 
+8: Media Queries
 */
 
 /* Structure */
@@ -143,7 +144,7 @@ hr {
 #controls {
   max-width: 1080px;
   margin: 0 auto;
-  padding-top: 2rem;
+  padding: 2rem 1rem 0;
 }
 
 #controls.striped {
@@ -192,12 +193,11 @@ button.del.hidden {
 }
 
 button:disabled {
-  opacity: 0.8;
-  filter: blur(2px);
+  opacity: 0.2;
 }
 
 button[type="submit"] {
-  transition: all 0.3s;
+  transition: opacity 0.3s;
 }
 
 button:disabled:hover {
@@ -217,12 +217,11 @@ button:disabled:hover {
 
 .step#two {
   background: #da907f;
-  transition: filter 0.7s, opacity 0.7s;
+  transition: opacity 0.7s;
 }
 
 .step.blurred {
-  filter: blur(3px);
-  opacity: 0.8;
+  opacity: 0.2;
 }
 
 #kit {
@@ -245,6 +244,7 @@ button:disabled:hover {
 }
 
 #prepped:empty {
+  margin-top: 1rem;
   width: 0.5em;
   height: 0.5em;
   padding: 0.5em;
@@ -282,20 +282,16 @@ select, .number input {
 #one label, #one span {
   display: inline-block;
   font-size: 1.4em;
-  margin: 0 1rem;
 }
 
-#one > fieldset > .number:first-child label {
-  margin-left: 0;
-}
-
-.selector label {
-  margin-left: 1rem;
+#one input {
+  margin: 0 2.5rem;
 }
 
 .selector {
   position: relative;
   height: 60px;
+  margin-right: 1.5rem;
 }
 
 .selector:after {
@@ -315,6 +311,7 @@ select, .number input {
 .selector select {
   cursor: pointer;
   outline: none;
+  margin-left: 2.5rem;
   padding-right: 1.8rem;
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -500,5 +497,66 @@ table input:focus {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+/* Media Queries */
+
+@media screen and (max-width:1100px) {
+  #one fieldset {
+    text-align: center;
+  }
+  #one label, #one input {
+    width: 100%;
+    margin: 0;
+  }
+  #one input, #one select {
+    border-width: 2px;
+  }
+  #one select {
+    margin: 0.5rem 0;
+    padding-right: 0;
+  }
+  .selector:after {
+    display: none;
+  }
+  #one label {
+    margin: 1rem 0;
+  }
+  #one span {
+    margin-top: 1rem;
+  }
+  .number, .selector {
+    width: 100%;
+    margin: 0;
+  }
+  .selector {
+    margin-top: 0;
+  }
+  .step {
+    padding-top: 0;
+  }
+  #two fieldset{
+    text-align: center;
+  }
+  fieldset .yes-no {
+    width: 100%;
+    margin: 1rem 0;
+  }
+  fieldset .yes-no:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (max-width:570px) {
+  #two fieldset{
+    text-align: center;
+  }
+  fieldset .yes-no {
+    width: 100%;
+    margin: 1rem 0;
+  }
+  fieldset .yes-no:last-child {
+    margin-bottom: 0;
   }
 }

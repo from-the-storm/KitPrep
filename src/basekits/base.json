@@ -1,6 +1,6 @@
 [
     {
-        "name": "Water (litres)",
+        "name": "Water (in litres)",
         "quantity": 4,
         "perishable": true
     },
@@ -9,5 +9,125 @@
         "quantity": 1,
         "perishable": false,
         "shareable": true
+    },
+    {
+        "name": "Blankets",
+        "quantity": 1,
+        "perishable": false,
+        "shareable": false
+    },
+    {
+        "name": "Jar of Honey",
+        "quantity": 1,
+        "perishable": false,
+        "shareable": true
+    },
+    {
+        "name": "Box of Crackers",
+        "quantity": 1,
+        "perishable": true,
+        "shareable": true
+    },
+    {
+        "name": "Box of Granola Bars",
+        "quantity": 1,
+        "perishable": true,
+        "shareable": true
+    },
+    {
+        "name": "Jar of Peanut/Almond Butter",
+        "quantity": 1,
+        "perishable": true,
+        "shareable": true
+    },
+    {
+        "name": "Can of Beans",
+        "quantity": 1,
+        "perishable": true,
+        "shareable": false
+    },
+    {
+        "name": "Can of Lentils",
+        "quantity": 1,
+        "perishable": true,
+        "shareable": false
+    },
+    {
+        "name": "Instant Rice",
+        "quantity": 1,
+        "perishable": true,
+        "shareable": false
+    },
+    {
+        "name": "Flashlight",
+        "quantity": 1,
+        "perishable": false,
+        "shareable": true
+    },
+    {
+        "name": "Batteries",
+        "quantity": 8,
+        "perishable": true,
+        "shareable": true
+    },
+    {
+        "name": "Medication (check with your doctor before storing)",
+        "quantity": 1,
+        "perishable": true,
+        "shareable": true
+    },
+    {
+        "name": "Books",
+        "quantity": 2,
+        "perishable": false,
+        "shareable": true
+    },
+    {
+        "name": "Candles",
+        "quantity": 4,
+        "perishable": false,
+        "shareable": true
+    },
+    {
+        "name": "Lighters or matches",
+        "quantity": 2,
+        "perishable": false,
+        "shareable": true
+    },
+    {
+        "name": "Pocket radio",
+        "quantity": 1,
+        "perishable": false,
+        "shareable": true
+    },
+    {
+        "name": "Whistle",
+        "quantity": 1,
+        "perishable": false,
+        "shareable": true
+    },
+    {
+        "name": "Instant coffee/tea",
+        "quantity": 1,
+        "perishable": true,
+        "shareable": false
+    },
+    {
+        "name": "Salt and Pepper",
+        "quantity": 1,
+        "perishable": false,
+        "shareable": true
+    },
+    {
+        "name": "Disposable cups, plates, and cutlery",
+        "quantity": 1,
+        "perishable": false,
+        "shareable": false
+    },
+    {
+        "name": "Help/OK Sign to display in your window [https://goo.gl/CsqHyb]",
+        "quantity": 1,
+        "perishable": false,
+        "shareable": false
     }
 ]
