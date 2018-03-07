@@ -204,7 +204,7 @@ class Kit extends Component {
                             key={item.id}
                             supplyId={item.id}
                             supplyName={item.name}
-                            supplyQuantity={item.quantity * this.props.people}
+                            supplyQuantity={(item.quantity * this.props.people) * this.props.days}
                             perishable={item.perishable}
                             onRemove={this.removeSupply}
                             onChange={this.updateSupply}
@@ -230,7 +230,7 @@ class Kit extends Component {
                             key={item.id}
                             supplyId={item.id}
                             supplyName={item.name}
-                            supplyQuantity={item.quantity * this.props.people}
+                            supplyQuantity={(item.quantity * this.props.people) * this.props.days}
                             onRemove={this.removeSupply}
                             onChange={this.updateSupply}
                         />

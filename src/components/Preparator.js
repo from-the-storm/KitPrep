@@ -20,6 +20,7 @@ class Preparator extends Component {
             // Form variables
             people: 1,
             city: '',
+            days: 3,
             kids: undefined,
             pets: undefined,
             home: undefined,
@@ -103,8 +104,9 @@ class Preparator extends Component {
                                 <div>
                                     <div id="one" className="step">
                                         <fieldset>
-                                            <Number directions="Prep my kit for" name="people" selection={this.state.people} handleFormChange={this.handleFormChange} />
+                                            <Number directions="Prep my kit for" min={1} max={24} name="people" selection={this.state.people} handleFormChange={this.handleFormChange} />
                                             <Selector people={this.state.people} name="city" selection={this.state.city} handleFormChange={this.handleFormChange} />
+                                            <Number directions="for" min={3} max={14} name="days" selection={this.state.days} handleFormChange={this.handleFormChange} /><span>days.</span>
                                         </fieldset>
                                     </div>
                                     <div id="two" className={enablePartTwo ? 'step clear' : 'step blurred'}>
@@ -145,6 +147,7 @@ class Preparator extends Component {
                                 reset={this.state.reset}
                                 saved={this.state.saved}
                                 people={parseInt(this.state.people, 10)}
+                                days={parseInt(this.state.days, 10)}
                                 city={this.state.city}
                                 kids={this.state.kids}
                                 pets={this.state.pets}

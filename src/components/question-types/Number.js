@@ -13,13 +13,13 @@ class Number extends Component {
             <div className="number">
                 <label htmlFor={this.props.name}>{this.props.directions}</label>
                 <input
-                name="people"
+                name={this.props.name}
                 type="number"
                 required
                 aria-label="Number of people we're prepping for"
                 value={this.props.selection}
-                min="1"
-                max="99"
+                min={this.props.min}
+                max={this.props.max}
                 onFocus={this.handleFocus}
                 onChange={this.props.handleFormChange}
                 />

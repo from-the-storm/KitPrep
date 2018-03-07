@@ -279,11 +279,14 @@ select, .number input {
   border-bottom: 7px solid #ffffff;
 }
 
-#one label {
+#one label, #one span {
   display: inline-block;
-  min-width: 95px;
   font-size: 1.4em;
-  margin-right: 1rem;
+  margin: 0 1rem;
+}
+
+#one > fieldset > .number:first-child label {
+  margin-left: 0;
 }
 
 .selector label {
