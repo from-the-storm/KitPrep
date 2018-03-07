@@ -1,17 +1,20 @@
 [
     {
-        "name": "Kids thing",
-        "quantity": 4,
-        "perishable": true
+        "name": "Toys, books, games, crayons, paper",
+        "quantity": 1,
+        "perishable": false,
+        "shareable": true
     },
     {
-        "name": "Electricity",
-        "quantity": 40,
-        "perishable": true
+        "name": "Formula",
+        "quantity": 1,
+        "perishable": true,
+        "shareable": true
     },
     {
-        "name": "Apples",
-        "quantity": 12,
-        "perishable": false
+        "name": "Diapers",
+        "quantity": 1,
+        "perishable": false,
+        "shareable": true
     }
 ]

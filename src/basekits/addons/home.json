@@ -1,17 +1,3 @@
 [
-    {
-        "name": "Homeowner thing",
-        "quantity": 4,
-        "perishable": true
-    },
-    {
-        "name": "Electricity",
-        "quantity": 40,
-        "perishable": false
-    },
-    {
-        "name": "Apples",
-        "quantity": 12,
-        "perishable": true
-    }
+
 ]

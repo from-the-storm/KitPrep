@@ -1,17 +1,8 @@
 [
     {
-        "name": "Vehicle thing",
-        "quantity": 4,
-        "perishable": false
-    },
-    {
-        "name": "Electricity",
-        "quantity": 40,
-        "perishable": true
-    },
-    {
-        "name": "Apples",
-        "quantity": 12,
-        "perishable": false
+        "name": "Booster cables",
+        "quantity": 1,
+        "perishable": false,
+        "shareable": true
     }
 ]

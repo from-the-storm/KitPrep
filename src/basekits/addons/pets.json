@@ -1,17 +1,38 @@
 [
     {
-        "name": "Pets thing",
-        "quantity": 4,
-        "perishable": true
+        "name": "Pet first aid kit",
+        "quantity": 1,
+        "perishable": false,
+        "shareable": true
     },
     {
-        "name": "Electricity",
-        "quantity": 40,
-        "perishable": true
+        "name": "Medication for your pet (check with you vet before storing)",
+        "quantity": 1,
+        "perishable": true,
+        "shareable": true
     },
     {
-        "name": "Apples",
-        "quantity": 12,
-        "perishable": false
+        "name": "Pet collar, leash, and toys",
+        "quantity": 1,
+        "perishable": false,
+        "shareable": true
+    },
+    {
+        "name": "Cage or Kennel",
+        "quantity": 1,
+        "perishable": false,
+        "shareable": true
+    },
+    {
+        "name": "Pet food",
+        "quantity": 1,
+        "perishable": false,
+        "shareable": true
+    },
+    {
+        "name": "Cat litter",
+        "quantity": 1,
+        "perishable": false,
+        "shareable": true
     }
 ]

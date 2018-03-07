@@ -2,7 +2,14 @@
     {
         "name": "Water (in litres)",
         "quantity": 4,
-        "perishable": true
+        "perishable": true,
+        "shareable": false
+    },
+    {
+        "name": "First Aid Kit",
+        "quantity": 1,
+        "perishable": true,
+        "shareable": true
     },
     {
         "name": "Manual can and bottle opener",
@@ -66,7 +73,7 @@
     },
     {
         "name": "Batteries",
-        "quantity": 8,
+        "quantity": 2,
         "perishable": true,
         "shareable": true
     },
@@ -84,7 +91,7 @@
     },
     {
         "name": "Candles",
-        "quantity": 4,
+        "quantity": 2,
         "perishable": false,
         "shareable": true
     },
@@ -129,5 +136,29 @@
         "quantity": 1,
         "perishable": false,
         "shareable": false
+    },
+    {
+        "name": "Paper towels (rolls)",
+        "quantity": 1,
+        "perishable": false,
+        "shareable": false
+    },
+    {
+        "name": "Disinfecting wipes",
+        "quantity": 1,
+        "perishable": false,
+        "shareable": true
+    },
+    {
+        "name": "Plastic bags",
+        "quantity": 1,
+        "perishable": false,
+        "shareable": true
+    },
+    {
+        "name": "Hand sanitizer",
+        "quantity": 1,
+        "perishable": true,
+        "shareable": true
     }
 ]
