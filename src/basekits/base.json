@@ -1,17 +1,13 @@
 [
     {
-        "name": "Electricity",
-        "quantity": 40,
+        "name": "Water (litres)",
+        "quantity": 4,
         "perishable": true
     },
     {
-        "name": "Apples",
-        "quantity": 12,
-        "perishable": true
-    },
-    {
-        "name": "Thing that doesn't expire",
-        "quantity": 12,
-        "perishable": false
+        "name": "Manual can and bottle opener",
+        "quantity": 1,
+        "perishable": false,
+        "shareable": true
     }
 ]

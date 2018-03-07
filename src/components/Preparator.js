@@ -84,10 +84,10 @@ class Preparator extends Component {
   
     render() {
         // Check to see if all form elements are filled in
-        const { people, city, kids, pets, home, vehicle } = this.state
+        const { people, city, kids, pets, home, vehicle, days } = this.state
         let enablePartTwo = false
         let enableSubmit = false
-        if (people > 0 && city) {
+        if (people > 0 && city && days > 0) {
             enablePartTwo = true
         }
         if (enablePartTwo && kids && pets && home && vehicle) {
@@ -106,7 +106,7 @@ class Preparator extends Component {
                                         <fieldset>
                                             <Number directions="Prep my kit for" min={1} max={24} name="people" selection={this.state.people} handleFormChange={this.handleFormChange} />
                                             <Selector people={this.state.people} name="city" selection={this.state.city} handleFormChange={this.handleFormChange} />
-                                            <Number directions="for" min={3} max={14} name="days" selection={this.state.days} handleFormChange={this.handleFormChange} /><span>days.</span>
+                                            <Number directions="for" min={1} max={14} name="days" selection={this.state.days} handleFormChange={this.handleFormChange} /><span>days.</span>
                                         </fieldset>
                                     </div>
                                     <div id="two" className={enablePartTwo ? 'step clear' : 'step blurred'}>

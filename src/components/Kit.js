@@ -230,7 +230,10 @@ class Kit extends Component {
                             key={item.id}
                             supplyId={item.id}
                             supplyName={item.name}
-                            supplyQuantity={(item.quantity * this.props.people) * this.props.days}
+                            supplyQuantity={
+                                // If the item can be shared (e.g. a can opener) then we don't need to multiply by the number of people
+                                item.shareable === true ? (item.quantity * this.props.people) : item.quantity
+                            }
                             onRemove={this.removeSupply}
                             onChange={this.updateSupply}
                         />
