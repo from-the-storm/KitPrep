@@ -19,6 +19,7 @@ The emergency preparedness kit preparator. Made with [Create React App](https://
 - [ ] Animations
 - [ ] Accessibility
 - [ ] Browser testing
+- [ ] Grab and Go Vs. Home Kit
 - [ ] Update Firebase rules
 - [X] Only update state of Kit when we hit save
 - [X] Remove initial expiration
