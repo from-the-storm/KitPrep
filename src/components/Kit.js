@@ -27,6 +27,7 @@ class Kit extends Component {
        
         this.nextId = this.nextId.bind(this)
         this.saveKit = this.saveKit.bind(this)
+        this.print = this.print.bind(this)
     }
 
     componentWillMount() {
@@ -164,6 +165,10 @@ class Kit extends Component {
         this.customId = this.customId || 0
         return 'custom-' + this.customId++
     }
+
+    print() {
+        window.print()
+    }
     
     render() {
         const loading = this.state.loading
@@ -184,8 +189,10 @@ class Kit extends Component {
                 {
                 // If there's a saved kit, display the link to it
                 this.props.saved && 
-                    <p className="savedKit">Your Kit is saved to <code><Link to={{ pathname: '/' + window.location.pathname.substr(1) }}>kitprep.ca/{window.location.pathname.substr(1)}</Link></code></p>
+                    <p className="savedKit">Your Kit is saved to <code><Link to={{ pathname: '/' + window.location.pathname.substr(1) }}>https://kitprep-75294.firebaseapp.com/{window.location.pathname.substr(1)}</Link></code></p>
                 }
+                <br />
+                <a className="print" onClick={this.print}>Print my Kit</a>
                 <h4>Perishables</h4>
                 <table>
                     <thead>

@@ -46,12 +46,12 @@ footer {
 
 /* Typography */
 
-h1 {
+h1, h5 {
   font-size: 3em;
   margin: 0 0 1rem 0;
 }
 
-h2 {
+h2, h6 {
   font-size: 1.4em;
   font-weight: normal;
   margin: 0;
@@ -66,6 +66,10 @@ h4 {
   font-size: 1.6em;
   margin-bottom: 0.5rem;
   padding: 0.75rem 0;
+}
+
+h6.printThis {
+  text-decoration: underline;
 }
 
 p.savedKit {
@@ -151,13 +155,13 @@ hr {
   border-top: 1px solid #c2c2c2;
 }
 
-#controls button, .save {
-  width: 140px;
+#controls button, .save, .print {
+  width: 150px;
   box-sizing: border-box;
   text-align: center;
 }
 
-button, .save {
+button, .save, .print {
   padding: 1rem;
   border: 0;
   background: #303030;
@@ -169,7 +173,11 @@ button, .save {
   display: inline-block;
 }
 
-button:hover, .save:hover {
+.print {
+  margin-top: 1rem;
+}
+
+button:hover, .save:hover, .print:hover {
   background: #e66f6f;
   color: #ffffff;
 }
@@ -203,6 +211,10 @@ button[type="submit"] {
 button:disabled:hover {
   background: #303030;
   cursor: default;
+}
+
+.printThis {
+  display: none;
 }
 
 /* Sections */
@@ -559,4 +571,23 @@ table input:focus {
   fieldset .yes-no:last-child {
     margin-bottom: 0;
   }
+}
+
+@media print {
+  body {
+    font-size: 16px !important;
+  }
+  a.save, a.print, p.savedKit, br, footer, button, button.show, #controls, .dontPrint, img, header div.image {
+    display: none;
+  }
+  .dontPrint {
+    display: none;
+  }
+  .printThis {
+    display: block;
+  }
+  h4 {
+    margin-top: 0;
+  }
+  
 }
