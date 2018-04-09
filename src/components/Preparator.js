@@ -9,6 +9,8 @@ import Number from './question-types/Number'
 import Selector from './question-types/Selector'
 import YesNo from './question-types/YesNo'
 
+import Modal from 'react-responsive-modal'
+
 import fire from '../fire'
 
 class Preparator extends Component {
@@ -24,7 +26,9 @@ class Preparator extends Component {
             kids: undefined,
             pets: undefined,
             home: undefined,
-            vehicle: undefined
+            vehicle: undefined,
+            // Modal state
+            open: false,
         })
         // Capture initial state
         this.startingPoint = this.state
@@ -81,10 +85,18 @@ class Preparator extends Component {
             saved: true
         })
     }
+
+    onOpenModal = () => {
+        this.setState({ open: true });
+    };
+    
+    onCloseModal = () => {
+        this.setState({ open: false });
+    };
   
     render() {
         // Check to see if all form elements are filled in
-        const { people, city, kids, pets, home, vehicle, days } = this.state
+        const { people, city, kids, pets, home, vehicle, days, open } = this.state
         let enablePartTwo = false
         let enableSubmit = false
         if (people > 0 && city && days > 0) {
@@ -127,10 +139,9 @@ class Preparator extends Component {
                                     disabled={!enableSubmit}>
                                     Prep my kit
                                 </button>
-                                <button 
-                                    onClick={this.handleReset}
-                                    type="submit"
-                                    className={this.state.prepped ? 'show' : 'hide'}
+                                <button
+                                    onClick={this.onOpenModal}
+                                    className={this.state.prepped ? 'show reset' : 'hide'}
                                     disabled={!this.state.prepped}>
                                     Reset my kit
                                 </button>
@@ -159,6 +170,30 @@ class Preparator extends Component {
                 </section>
                 }
                 <Footer />
+                <Modal 
+                    open={open}
+                    onClose={this.onCloseModal}
+                    classNames={{
+                        overlay: 'confirm-reset-overlay',
+                        modal: 'confirm-reset',
+                    }}
+                    showCloseIcon={false}
+                >
+                    <h2>Are you sure you want to reset your kit?</h2>
+                    <div className="reset-controls">
+                        <button
+                            onClick={this.onCloseModal}
+                            type="submit">
+                                No
+                        </button>
+                        <button
+                            className="reset"
+                            onClick={this.handleReset}
+                            type="submit">
+                                Yes, Reset it
+                        </button>
+                    </div>
+                </Modal>
             </div>
         )
     }

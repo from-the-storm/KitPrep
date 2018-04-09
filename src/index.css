@@ -63,6 +63,10 @@ h2, h6 {
   margin: 0;
 }
 
+.confirm-reset h2 {
+  margin-bottom: 1rem;
+}
+
 h3 {
   font-size: 3em;
   margin: 0 0 2rem 0;
@@ -79,8 +83,7 @@ h6.printThis {
 }
 
 p.savedKit {
-  display: inline-block;
-  margin: 0 1rem;
+  margin-top: 2rem;
 }
 
 code a {
@@ -187,15 +190,23 @@ button, .save, .print {
   cursor: pointer;
   border-radius: 2px;
   display: inline-block;
+  border: 1px solid #303030;
+}
+
+button.reset {
+  background: none;
+  color: #303030;
 }
 
 .print {
   margin-top: 1rem;
+  margin-right: 1rem;
 }
 
 button:hover, .save:hover, .print:hover {
   background: #e66f6f;
   color: #ffffff;
+  border-color: #e66f6f;
 }
 
 button.add-supply {
@@ -434,6 +445,19 @@ fieldset .yes-no {
 
 fieldset .yes-no:last-child {
   margin-right: 0;
+}
+
+.confirm-reset-overlay {
+  align-items: center !important;
+}
+
+.confirm-reset .reset-controls {
+  text-align: right;
+  margin-top: 1rem;
+}
+
+.confirm-reset .reset-controls button {
+  margin-left: 1rem;
 }
 
 /* 6: Kit */

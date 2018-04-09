@@ -179,20 +179,19 @@ class Kit extends Component {
 
         return (
             <div>
+                <a className="print" onClick={this.print}>Print</a>
                 {
                 !this.props.saved ? 
                     // If there's no savedKit, link to it to update the route
-                    <Link to={{ pathname: '/' + uuId }} onClick={this.saveKit} className="save">Save My Kit</Link> : 
+                    <Link to={{ pathname: '/' + uuId }} onClick={this.saveKit} className="save">Save</Link> : 
                     // Otherwise just update it
-                    <a onClick={this.saveKit} className="save">Save My Kit</a>
+                    <a onClick={this.saveKit} className="save">Save</a>
                 }
                 {
                 // If there's a saved kit, display the link to it
                 this.props.saved && 
                     <p className="savedKit">Your Kit is saved to <code><Link to={{ pathname: '/' + window.location.pathname.substr(1) }}>https://kitprep-75294.firebaseapp.com/{window.location.pathname.substr(1)}</Link></code></p>
                 }
-                <br />
-                <a className="print" onClick={this.print}>Print my Kit</a>
                 <h4>Perishables</h4>
                 <table>
                     <thead>
