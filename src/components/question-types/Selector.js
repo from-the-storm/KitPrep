@@ -6,7 +6,7 @@ const Selector = ({name, handleFormChange, selection, people}) => (
             {people === 1 ? "person in" : "people in" }
         </label>
         <select
-            // required
+            required
             name={name}
             value={selection}
             aria-label="Which city are we preparing for?"

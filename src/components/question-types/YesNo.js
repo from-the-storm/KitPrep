@@ -6,7 +6,7 @@ const YesNo = ({name, handleFormChange, question, selection}) => (
             <legend>{question}</legend>
             <div className="radio">
                 <input 
-                    // required
+                    required
                     name={name}
                     type="radio"
                     id={name + 'Yes'}
@@ -18,7 +18,7 @@ const YesNo = ({name, handleFormChange, question, selection}) => (
             </div>
             <div className="radio">
                 <input 
-                    // required
+                    required
                     name={name}
                     type="radio"
                     id={name + 'No'}
