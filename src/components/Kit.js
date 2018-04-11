@@ -9,6 +9,8 @@ import fire from '../fire'
 import { Link } from 'react-router-dom'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
+
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import faCopy from '@fortawesome/fontawesome-pro-regular/faCopy'
 import faEnvelope from '@fortawesome/fontawesome-pro-regular/faEnvelope'
@@ -26,7 +28,9 @@ class Kit extends Component {
             loading: true,
             kitContents: [],
             // Copy to clipboard
-            copied: false
+            copied: false,
+            // Animate the saved kit URL
+            justSaved: false
         })
         this.addSupply = this.addSupply.bind(this)
         
@@ -128,7 +132,17 @@ class Kit extends Component {
     saveKit() {
         // Save or update the kit in Firebase
         kitRef.set(this.state.kitContents)
-        // Let Preparator know that it's saved
+
+        // Animate the saved Kit URL
+        this.setState({justSaved: true})
+        // Remove copied message
+            setTimeout(() => 
+            this.setState({
+                justSaved: false
+            }),
+        1250)
+
+        // Let the Preparator Component know that it's saved
         this.props.onClick()      
     }
 
@@ -211,7 +225,7 @@ class Kit extends Component {
                 // If there's a saved kit, display the link to it
                 this.props.saved && 
                     <div>
-                        <p className="savedKit">Your Kit is saved to: <code><Link to={{ pathname: '/' + kitPath }}>https://kitprep-75294.firebaseapp.com/{kitPath}</Link></code></p>
+                        <p className="savedKit">Your Kit is saved to: <code className={this.state.justSaved ? 'shake' : ''}><Link to={{ pathname: '/' + kitPath }}>https://kitprep-75294.firebaseapp.com/{kitPath}</Link></code></p>
                         <a className="button url" title="Email my Kit" href={'mailto:?Subject=Emergency%20Prep%20Kit&Body=Here%27s%20a%20link%20to%20my%20prepped%20kit%3A%20https://kitprep-75294.firebaseapp.com/' + kitPath + '%20[Created%20with%20KitPrep.ca]'}><FontAwesomeIcon icon={faEnvelope} /></a>
                         <CopyToClipboard 
                             text={'https://kitprep-75294.firebaseapp.com/' + kitPath}
@@ -234,20 +248,28 @@ class Kit extends Component {
                         </tr>
                     </thead>
                     <tbody>
+                    {/* <TransitionGroup> renders a <div> by default. You can change this behavior by providing a component prop. If you use React v16+ and would like to avoid a wrapping <div> element you can pass in component={null}. This is useful if the wrapping div borks your css styles. */}
+                    <TransitionGroup component={null}>
                     {
                     // Map the perishables
                     this.state.kitContents.filter(item => item.perishable === true).map(item =>
-                        <Supply 
+                        <CSSTransition
                             // From react docs: We don’t recommend using indexes for keys if the order of items may change. This can negatively impact performance and may cause issues with component state.
                             key={item.id}
-                            supplyId={item.id}
-                            supplyName={item.name}
-                            supplyQuantity={(item.quantity * this.props.people) * this.props.days}
-                            perishable={item.perishable}
-                            onRemove={this.removeSupply}
-                            onChange={this.updateSupply}
-                        />
+                            timeout={500}
+                            classNames="fade"
+                        >
+                            <Supply 
+                                supplyId={item.id}
+                                supplyName={item.name}
+                                supplyQuantity={(item.quantity * this.props.people) * this.props.days}
+                                perishable={item.perishable}
+                                onRemove={this.removeSupply}
+                                onChange={this.updateSupply}
+                            />
+                        </CSSTransition>
                     )}
+                    </TransitionGroup>
                     </tbody>
                 </table>
                 <button className="add-supply" id="perishable" onClick={this.addSupply}><FontAwesomeIcon icon={faPlus} />supply</button>
@@ -261,21 +283,29 @@ class Kit extends Component {
                         </tr>
                     </thead>
                     <tbody>
+                    <TransitionGroup component={null}>
                     {
                     // Map the nonperishables
                     this.state.kitContents.filter(item => item.perishable === false).map(item =>
-                        <Supply 
-                            key={item.id}
-                            supplyId={item.id}
-                            supplyName={item.name}
-                            supplyQuantity={
-                                // If the item can be shared (e.g. a can opener) then we don't need to multiply by the number of people
-                                item.shareable === true ? item.quantity : (item.quantity * this.props.people)
-                            }
-                            onRemove={this.removeSupply}
-                            onChange={this.updateSupply}
-                        />
+                        <CSSTransition
+                        // From react docs: We don’t recommend using indexes for keys if the order of items may change. This can negatively impact performance and may cause issues with component state.
+                        key={item.id}
+                        timeout={500}
+                        classNames="fade"
+                        >
+                            <Supply 
+                                supplyId={item.id}
+                                supplyName={item.name}
+                                supplyQuantity={
+                                    // If the item can be shared (e.g. a can opener) then we don't need to multiply by the number of people
+                                    item.shareable === true ? item.quantity : (item.quantity * this.props.people)
+                                }
+                                onRemove={this.removeSupply}
+                                onChange={this.updateSupply}
+                            />
+                        </CSSTransition>
                     )}
+                    </TransitionGroup>
                     </tbody>
                 </table>
                 <button className="add-supply" id="nonperishable" onClick={this.addSupply}><FontAwesomeIcon icon={faPlus} />supply</button>

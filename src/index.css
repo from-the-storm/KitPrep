@@ -90,6 +90,11 @@ p.savedKit {
 p.savedKit code {
   display: block;
   margin-top: 1rem;
+  transform: translateY(0);
+}
+
+p.savedKit code.shake {
+  animation: shake 1s both;
 }
 
 code a {
@@ -592,18 +597,65 @@ table input:focus {
   }
 }
 
+@keyframes quick-fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translateY(-1px);
+  }
+  20%, 80% {
+    transform: translateY(2px);
+  }
+  30%, 50%, 70% {
+    transform: translateY(-3px);
+  }
+  40%, 60% {
+    transform: translateY(3px);
+  }
+}
+
+/* From React Transition Group */
+
+.fade-enter {
+  opacity: 0.01;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
+
 /* 8: Media Queries */
 
 @media screen and (max-width:1100px) {
   #one fieldset {
     text-align: center;
   }
-  #one label, #one input {
+  #one fieldset div:last-of-type {
+    margin-top: 0.5rem;
+  }
+  #one label, #one input, #one select {
     width: 100%;
     margin: 0;
   }
   #one input, #one select {
-    border-width: 2px;
+    border-width: 3px;
   }
   #one select {
     margin: 0.5rem 0;
@@ -650,6 +702,14 @@ table input:focus {
   }
   fieldset .yes-no:last-child {
     margin-bottom: 0;
+  }
+  header > div {
+    flex-flow: column;
+  }
+  header div > div:first-child {
+    margin-right: 0;
+    margin-bottom: 1.5rem;
+    text-align: center;
   }
 }
 
