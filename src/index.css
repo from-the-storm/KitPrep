@@ -83,7 +83,7 @@ h6.printThis {
 }
 
 p.savedKit {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   display: inline-block;
 }
 
@@ -227,7 +227,6 @@ a.url {
 }
 
 .print {
-  margin-top: 1rem;
   margin-right: 1rem;
 }
 
@@ -692,7 +691,7 @@ table input:focus {
   }
 }
 
-@media screen and (max-width:570px) {
+@media screen and (max-width:590px) {
   #two fieldset{
     text-align: center;
   }
@@ -709,6 +708,29 @@ table input:focus {
   header div > div:first-child {
     margin-right: 0;
     margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  code a {
+    display: inline-block;
+    line-height: 1.5;
+  }
+  a.url {
+    margin-left: 0;
+  }
+  .url {
+    font-size: 1.2em;
+  }
+  button.url {
+    vertical-align: bottom;
+    width: 36px;
+  }
+  .save, .print {
+    width: 85px;
+  }
+  p.savedKit {
+    margin-top: 1rem;
+  }
+  #prep, #prepped {
     text-align: center;
   }
 }
