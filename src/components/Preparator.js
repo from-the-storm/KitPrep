@@ -61,6 +61,7 @@ class Preparator extends Component {
         this.setState({
             reset: true
         })
+        window.scrollTo(0, 0)
         event.preventDefault()
     }
 
@@ -190,7 +191,7 @@ class Preparator extends Component {
                             className="reset"
                             onClick={this.handleReset}
                             type="submit">
-                                Yes, Reset it
+                                Yes
                         </button>
                     </div>
                 </Modal>

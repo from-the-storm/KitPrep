@@ -7,6 +7,12 @@ import update from 'immutability-helper'
 import fire from '../fire'
 
 import { Link } from 'react-router-dom'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
+
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import faCopy from '@fortawesome/fontawesome-pro-regular/faCopy'
+import faEnvelope from '@fortawesome/fontawesome-pro-regular/faEnvelope'
+import faPlus from '@fortawesome/fontawesome-pro-regular/faPlus'
 
 let uuId = ''
 let kitRef = ''
@@ -18,7 +24,9 @@ class Kit extends Component {
         super(props)
         this.state = ({
             loading: true,
-            kitContents: []
+            kitContents: [],
+            // Copy to clipboard
+            copied: false
         })
         this.addSupply = this.addSupply.bind(this)
         
@@ -27,6 +35,7 @@ class Kit extends Component {
        
         this.nextId = this.nextId.bind(this)
         this.saveKit = this.saveKit.bind(this)
+        this.onCopy = this.onCopy.bind(this)
         this.print = this.print.bind(this)
     }
 
@@ -169,9 +178,20 @@ class Kit extends Component {
     print() {
         window.print()
     }
+
+    onCopy() {
+        this.setState({copied: true})
+        // Remove copied message
+            setTimeout(() => 
+            this.setState({
+                copied: false
+            }),
+        2500)
+    }
     
     render() {
         const loading = this.state.loading
+        const kitPath = window.location.pathname.substr(1) 
         if (loading) {
             // Display the loading spinner using the CSS :empty selector
             return null
@@ -190,7 +210,19 @@ class Kit extends Component {
                 {
                 // If there's a saved kit, display the link to it
                 this.props.saved && 
-                    <p className="savedKit">Your Kit is saved to <code><Link to={{ pathname: '/' + window.location.pathname.substr(1) }}>https://kitprep-75294.firebaseapp.com/{window.location.pathname.substr(1)}</Link></code></p>
+                    <div>
+                        <p className="savedKit">Your Kit is saved to: <code><Link to={{ pathname: '/' + kitPath }}>https://kitprep-75294.firebaseapp.com/{kitPath}</Link></code></p>
+                        <a className="button url" title="Email my Kit" href={'mailto:?Subject=Emergency%20Prep%20Kit&Body=Here%27s%20a%20link%20to%20my%20prepped%20kit%3A%20https://kitprep-75294.firebaseapp.com/' + kitPath + '%20[Created%20with%20KitPrep.ca]'}><FontAwesomeIcon icon={faEnvelope} /></a>
+                        <CopyToClipboard 
+                            text={'https://kitprep-75294.firebaseapp.com/' + kitPath}
+                            onCopy={this.onCopy}>
+                            <button title="Copy Kit Link" className="url"><FontAwesomeIcon icon={faCopy} /></button>
+                        </CopyToClipboard>
+                        {
+                        this.state.copied &&
+                        <span className="copied">Link Copied!</span>
+                        }
+                    </div>
                 }
                 <h4>Perishables</h4>
                 <table>
@@ -218,7 +250,7 @@ class Kit extends Component {
                     )}
                     </tbody>
                 </table>
-                <button className="add-supply" id="perishable" onClick={this.addSupply}>Add supply</button>
+                <button className="add-supply" id="perishable" onClick={this.addSupply}><FontAwesomeIcon icon={faPlus} />supply</button>
                 <hr />
                 <h4>Non-Perishables</h4>
                 <table>
@@ -246,7 +278,7 @@ class Kit extends Component {
                     )}
                     </tbody>
                 </table>
-                <button className="add-supply" id="nonperishable" onClick={this.addSupply}>Add supply</button>
+                <button className="add-supply" id="nonperishable" onClick={this.addSupply}><FontAwesomeIcon icon={faPlus} />supply</button>
             </div>
         )
     }

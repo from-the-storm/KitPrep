@@ -64,7 +64,7 @@ h2, h6 {
 }
 
 .confirm-reset h2 {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 h3 {
@@ -84,11 +84,16 @@ h6.printThis {
 
 p.savedKit {
   margin-top: 2rem;
+  display: inline-block;
+}
+
+p.savedKit code {
+  display: block;
+  margin-top: 1rem;
 }
 
 code a {
-  padding: 0.25rem 0.5rem;
-  margin: 0 0.25rem;
+  padding: 0.5rem;
   background: #e66f6f;
   color: #ffffff;
   border: 0;
@@ -180,7 +185,12 @@ hr {
   text-align: center;
 }
 
-button, .save, .print {
+span.copied {
+  animation: 2s fade forwards; 
+  margin-left: 1rem;
+}
+
+button, .save, .print, .url {
   padding: 1rem;
   border: 0;
   background: #303030;
@@ -198,12 +208,25 @@ button.reset {
   color: #303030;
 }
 
+.url {
+  padding: 0.35rem 0.5rem;
+}
+
+button.url {
+  width: 34px;
+}
+
+a.url {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
 .print {
   margin-top: 1rem;
   margin-right: 1rem;
 }
 
-button:hover, .save:hover, .print:hover {
+button:hover, .save:hover, .print:hover, a.url:hover {
   background: #e66f6f;
   color: #ffffff;
   border-color: #e66f6f;
@@ -213,6 +236,10 @@ button.add-supply {
   font-size: 0.9em;
   padding: 0.5rem 0.7rem;
   margin: 0.75rem 0.25rem;
+}
+
+button.add-supply .fa-plus {
+  margin-right: 0.5rem;
 }
 
 button.del {
@@ -451,13 +478,17 @@ fieldset .yes-no:last-child {
   align-items: center !important;
 }
 
+.confirm-reset {
+  padding: 2rem !important;
+}
+
 .confirm-reset .reset-controls {
-  text-align: right;
   margin-top: 1rem;
 }
 
 .confirm-reset .reset-controls button {
-  margin-left: 1rem;
+  margin-right: 1rem;
+  width: 66px;
 }
 
 /* 6: Kit */
@@ -549,6 +580,15 @@ table input:focus {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes fade {
+  0%, 100% {
+    opacity: 0;
+  }
+  20%, 80% {
+    opacity: 1;
   }
 }
 

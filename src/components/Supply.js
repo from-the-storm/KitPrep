@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 
 import PropTypes from 'prop-types'
 
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import faTimes from '@fortawesome/fontawesome-pro-regular/faTimes'
+
 class Supply extends Component {
 
     constructor(props){
@@ -82,7 +85,7 @@ class Supply extends Component {
                 </td>
                 }
                 <td>
-                    <button className="del" onClick={this.removeSupply}>X</button>
+                    <button className="del" onClick={this.removeSupply}><FontAwesomeIcon icon={faTimes} /></button>
                 </td>
             </tr>
         )
