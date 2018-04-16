@@ -14,6 +14,7 @@ class Number extends Component {
                 <label htmlFor={this.props.name}>{this.props.directions}</label>
                 <input
                 name={this.props.name}
+                id={this.props.name}
                 type="number"
                 required
                 aria-label="Number of people we're prepping for"

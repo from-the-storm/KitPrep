@@ -48,16 +48,19 @@ class Supply extends Component {
     }
 
     render() {
+        const { supplyId } = this.props
         return (
             <tr>
                 <td>
                     <input 
                         type="text"
                         name="name"
+                        id={supplyId}
                         placeholder="Your supply"
                         value={this.state.name}
                         onChange={this.updateSupply}
                     />
+                    <label htmlFor={supplyId}>Supply</label>
                 </td>
                 <td>
                     <input 
@@ -66,11 +69,13 @@ class Supply extends Component {
                         min="1"
                         max="999"
                         step="1"
+                        id={'q-' + supplyId}
                         onFocus={this.handleFocus}
                         placeholder="#"
                         value={this.state.quantityOfSupply}
                         onChange={this.updateSupply}
                     />
+                    <label htmlFor={'q-' + supplyId}>Quantity of Supply</label>
                 </td>
                 {
                 // if the supply is perishable create an additional column
@@ -81,11 +86,13 @@ class Supply extends Component {
                         name="dateOfExpiry"
                         value={this.state.dateOfExpiry}
                         onChange={this.updateSupply}
+                        id={'e-' + supplyId}
                     />
+                    <label htmlFor={'e-' + supplyId}>Supply Expiry</label>
                 </td>
                 }
                 <td>
-                    <button className="del" onClick={this.removeSupply}><FontAwesomeIcon icon={faTimes} /></button>
+                    <button aria-label="Delete Supply" className="del" onClick={this.removeSupply}><FontAwesomeIcon icon={faTimes} /></button>
                 </td>
             </tr>
         )

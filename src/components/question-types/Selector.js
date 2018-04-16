@@ -8,8 +8,9 @@ const Selector = ({name, handleFormChange, selection, people}) => (
         <select
             required
             name={name}
+            id={name}
             value={selection}
-            aria-label="Which city are we preparing for?"
+            aria-label="What city do you live in?"
             onChange={handleFormChange}>
                 <option value="" disabled hidden>City name</option>
                 <option value="vancouver">Vancouver</option>

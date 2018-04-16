@@ -238,7 +238,7 @@ class Kit extends Component {
                         }
                     </div>
                 }
-                <h4>Perishables</h4>
+                <h3>Perishables</h3>
                 <table>
                     <thead>
                         <tr>
@@ -272,9 +272,9 @@ class Kit extends Component {
                     </TransitionGroup>
                     </tbody>
                 </table>
-                <button className="add-supply" id="perishable" onClick={this.addSupply}><FontAwesomeIcon icon={faPlus} />supply</button>
+                <button aria-label="Add Supply" className="add-supply" id="perishable" onClick={this.addSupply}><FontAwesomeIcon icon={faPlus} />supply</button>
                 <hr />
-                <h4>Non-Perishables</h4>
+                <h3>Non-Perishables</h3>
                 <table>
                     <thead>
                         <tr>
@@ -308,7 +308,7 @@ class Kit extends Component {
                     </TransitionGroup>
                     </tbody>
                 </table>
-                <button className="add-supply" id="nonperishable" onClick={this.addSupply}><FontAwesomeIcon icon={faPlus} />supply</button>
+                <button aria-label="Add Supply" className="add-supply" id="nonperishable" onClick={this.addSupply}><FontAwesomeIcon icon={faPlus} />supply</button>
             </div>
         )
     }

@@ -117,6 +117,7 @@ class Preparator extends Component {
                                 <div>
                                     <div id="one" className="step">
                                         <fieldset>
+                                            <legend>How many people, how many days, and in what city are we preparing for?</legend>
                                             <Number directions="Prep my kit for" min={1} max={24} name="people" selection={this.state.people} handleFormChange={this.handleFormChange} />
                                             <Selector people={this.state.people} name="city" selection={this.state.city} handleFormChange={this.handleFormChange} />
                                             <Number directions="for" min={1} max={14} name="days" selection={this.state.days} handleFormChange={this.handleFormChange} /><span>days.</span>
@@ -124,7 +125,7 @@ class Preparator extends Component {
                                     </div>
                                     <div id="two" className={enablePartTwo ? 'step clear' : 'step blurred'}>
                                         <fieldset disabled={!enablePartTwo}>
-                                            <legend>Customize</legend>
+                                            <legend>Customize your kit</legend>
                                             <YesNo question="Do you have young kids?" name="kids" selection={this.state.kids} handleFormChange={this.handleFormChange} />
                                             <YesNo question="Own any pets?" name="pets" selection={this.state.pets} handleFormChange={this.handleFormChange} />
                                             <YesNo question="Got a vehicle?" name="vehicle" selection={this.state.vehicle} handleFormChange={this.handleFormChange} />

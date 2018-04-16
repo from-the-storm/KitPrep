@@ -52,12 +52,12 @@ footer div {
 
 /* 2: Typography */
 
-h1, h5 {
+h1 {
   font-size: 3em;
   margin: 0 0 1rem 0;
 }
 
-h2, h6 {
+h2, h3.printThis.sub {
   font-size: 1.4em;
   font-weight: normal;
   margin: 0;
@@ -68,18 +68,18 @@ h2, h6 {
 }
 
 h3 {
-  font-size: 3em;
-  margin: 0 0 2rem 0;
-}
-
-h4 {
-  font-size: 1.6em;
+  font-size: 2em;
   margin-bottom: 0.5rem;
   padding: 0.75rem 0;
 }
 
-h6.printThis {
-  text-decoration: underline;
+h3.printThis {
+  font-size: 3em;
+  margin: 0;
+}
+
+h3.printThis.sub {
+  text-decoration: underline
 }
 
 p.savedKit {
@@ -421,6 +421,13 @@ input[type=number]::-webkit-outer-spin-button {
   height: 30px;
   line-height: 1.3rem;
   z-index: 1;
+  /* Prevent selecting the label's text */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none; 
+  user-select: none; 
 }
 
 input[type="radio"] {
@@ -456,8 +463,15 @@ input[type="radio"]:checked ~ label {
   padding: 1rem;
 }
 
-#two > fieldset > legend {
-  display: none;
+#one > fieldset > legend, #two > fieldset > legend {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
 }
 
 #two fieldset fieldset {
@@ -544,6 +558,17 @@ tr td:first-child {
 
 tr td:last-child {
   background: #ffffff;
+}
+
+table label {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
 }
 
 table input {
