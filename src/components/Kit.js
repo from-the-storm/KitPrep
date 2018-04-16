@@ -122,10 +122,12 @@ class Kit extends Component {
 
     componentDidMount() {
         // Fake a longer load for demo
-        setTimeout(() => 
+        setTimeout(() => {
             this.setState({
                 loading: false
-            }),
+            })
+            this.props.loaded()
+        },
         1500)
     }
 

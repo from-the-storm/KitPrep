@@ -19,6 +19,7 @@ class Preparator extends Component {
         super(props)
         this.state = ({
             prepped: false,
+            loaded: false,
             // Form variables
             people: 1,
             city: '',
@@ -33,16 +34,19 @@ class Preparator extends Component {
         // Capture initial state
         this.startingPoint = this.state
 
+        // In JavaScript, class methods are not bound by default. (Binding creates a new function that, when, called, has its `this` keyword set to the provided value.)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleFormChange = this.handleFormChange.bind(this)
         this.handleReset = this.handleReset.bind(this)
         this.handleSave = this.handleSave.bind(this)
+        this.handleKitLoaded = this.handleKitLoaded.bind(this)
     }
 
     componentWillMount() {
         const kitId = window.location.pathname
         // Check if we're not on the home page
         if (kitId !== '/') {
+            // If not, check Firebase for a matching saved kit
             return fire.database().ref('prepped-kits/' + kitId).once('value').then((snapshot) => {
                 const savedKit = snapshot.val() || undefined
                 // If there's an existing kit in Firebase
@@ -84,6 +88,12 @@ class Preparator extends Component {
     handleSave() {
         this.setState({
             saved: true
+        })
+    }
+
+    handleKitLoaded() {
+        this.setState({
+            loaded: true
         })
     }
 
@@ -141,12 +151,14 @@ class Preparator extends Component {
                                     disabled={!enableSubmit}>
                                     Prep my kit
                                 </button>
+                                {this.state.loaded &&
                                 <button
                                     onClick={this.onOpenModal}
                                     className={this.state.prepped ? 'show reset' : 'hide'}
                                     disabled={!this.state.prepped}>
                                     Reset my kit
                                 </button>
+                                }
                             </div>            
                         </form>
                     </div>
@@ -156,6 +168,7 @@ class Preparator extends Component {
                     <div id="prepped">
                         <ErrorBoundary>
                             <Kit
+                                loaded={this.handleKitLoaded}
                                 onClick={this.handleSave}
                                 reset={this.state.reset}
                                 saved={this.state.saved}
