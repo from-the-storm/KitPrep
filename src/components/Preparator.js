@@ -13,6 +13,8 @@ import Modal from 'react-responsive-modal'
 
 import fire from '../fire'
 
+/* tslint:disable */
+
 class Preparator extends Component {
     
     constructor(props) {

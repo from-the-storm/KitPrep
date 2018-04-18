@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-import faTimes from '@fortawesome/fontawesome-pro-regular/faTimes'
+import faTimes from '../fontawesome-pro/fontawesome-pro-regular/faTimes'
 
 class Supply extends Component {
 

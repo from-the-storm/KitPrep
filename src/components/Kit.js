@@ -12,9 +12,11 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-import faCopy from '@fortawesome/fontawesome-pro-regular/faCopy'
-import faEnvelope from '@fortawesome/fontawesome-pro-regular/faEnvelope'
-import faPlus from '@fortawesome/fontawesome-pro-regular/faPlus'
+import faCopy from '../fontawesome-pro/fontawesome-pro-regular/faCopy'
+import faEnvelope from '../fontawesome-pro/fontawesome-pro-regular/faEnvelope'
+import faPlus from '../fontawesome-pro/fontawesome-pro-regular/faPlus'
+
+/* tslint:disable */
 
 let uuId = ''
 let kitRef = ''

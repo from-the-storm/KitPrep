@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 
 import PropTypes from 'prop-types'
 
+/* tslint:disable */
+
 class Number extends Component {
 
     handleFocus(event) {
