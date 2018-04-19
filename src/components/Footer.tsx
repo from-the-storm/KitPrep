@@ -1,6 +1,6 @@
-import React from 'react'
+import * as React from 'react'
 
-const Footer = () => (
+export const Footer = () => (
     <footer>
         <div>
             <p>Created by <a href="https://github.com/from-the-storm">From the Storm</a>, makers of <a href="https://apocalypsemadeeasy.com">Apocalypse Made Easy!</a> &ndash; a Social Innovators Challenge Project funded by the <a href="https://ca.movember.com">Movember Foundation</a>.</p>
@@ -8,5 +8,3 @@ const Footer = () => (
         </div>
     </footer>
 )
-
-export default Footer

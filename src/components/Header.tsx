@@ -1,7 +1,7 @@
-import React from 'react'
-import supplies from '../img/supplies.jpg'
+import * as React from 'react'
+import * as supplies from '../images/supplies.jpg'
 
-const Header = () => (
+export const Header = () => (
     <header>
         <div>
             <div>
@@ -16,5 +16,3 @@ const Header = () => (
         </div>
     </header>
 )
-
-export default Header
