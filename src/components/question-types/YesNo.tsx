@@ -1,12 +1,20 @@
-import React from 'react'
+import * as React from 'react'
 
-const YesNo = ({name, handleFormChange, question, selection}) => (
+interface Props {
+    name: string,
+    selection: 'yes' | 'no',
+    question: string,
+    // Type of functions that don't return a value
+    handleFormChange: () => void
+}
+
+export const YesNo: React.SFC<Props> = ({name, selection, question, handleFormChange}) => (
     <div className="yes-no">
         <fieldset>
             <legend>{question}</legend>
             <div className="radio">
                 <input 
-                    required
+                    required={true}
                     name={name}
                     type="radio"
                     id={name + 'Yes'}
@@ -18,7 +26,7 @@ const YesNo = ({name, handleFormChange, question, selection}) => (
             </div>
             <div className="radio">
                 <input 
-                    required
+                    required={true}
                     name={name}
                     type="radio"
                     id={name + 'No'}
@@ -31,5 +39,3 @@ const YesNo = ({name, handleFormChange, question, selection}) => (
         </fieldset>
     </div>
 )
-
-export default YesNo

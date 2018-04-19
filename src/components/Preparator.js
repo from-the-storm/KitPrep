@@ -5,9 +5,9 @@ import Footer from './Footer'
 
 import ErrorBoundary from './ErrorBoundary'
 import Kit from './Kit'
-import Number from './question-types/Number'
-import Selector from './question-types/Selector'
-import YesNo from './question-types/YesNo'
+import { Number } from './question-types/Number'
+import { Selector } from './question-types/Selector'
+import { YesNo } from './question-types/YesNo'
 
 import Modal from 'react-responsive-modal'
 
